@@ -228,9 +228,9 @@ $("lv").addEventListener("click",function(ev){var t=ev.target,b,x;
  else if(t.closest("#fb")){$("cartd").open=true;$("cart").scrollIntoView({behavior:"smooth"})}});
 var mq="",mo={},cur=null,payopen=false,MN=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
 function tm(v){return v.t?new Date(v.t).toLocaleTimeString("ar-EG",{hour:"numeric",minute:"2-digit"}):""}
-function dd(d){return d.split("-").reverse().join("/")}
+function dd(d){return (d||today()).slice(0,10).split("-").reverse().join("/")}
 function vt(v){return v.t||Date.parse(v.d)||0}
-function mk(d){return d.slice(0,7)}
+function mk(d){return (d||today()).slice(0,7)}
 function mlab(k){var p=k.split("-");return MN[+p[1]-1]+" "+p[0]}
 function pn(v){return v.pt||"بدون اسم"}
 function pdata(n){var V=S.visits.filter(function(v){return pn(v)===n}),P=S.pays.filter(function(p){return p.pt===n}),t=0,pd=0,pp=0;
@@ -366,7 +366,7 @@ function rmf(){var n=cur,d=pdata(n),RB=runb(d),h='<button class="bk" data-op="ba
  E.forEach(function(z){(g[mk(z.x.d)]=g[mk(z.x.d)]||[]).push(z)});
  h+=Object.keys(g).sort().reverse().map(function(k){var a=g[k].sort(function(p,q){return q.t-p.t}),c=0,o=mo["f"+k],q="f"+k;a.forEach(function(z){c+=z.k==="v"?z.x.net:0});
   return '<section><div class="ch" data-m="'+q+'"><span>'+(o?'▾':'◂')+'</span><b class="cn">سجل '+mlab(k)+'</b><span class="cnt">'+a.length+'</span></div>'+(o?'<div class="le sm"><div>حسابات الشهر: '+fmt(c)+' ج.م</div></div>'+a.map(function(z){var v=z.x;
-   return z.k==="v"?'<div class="le"><div>🧾 '+dd(v.d)+' '+tm(v)+'<small>'+e(v.items.map(function(i){return i.n+(i.q>1?" ×"+i.q:"")}).join("، "))+(v.note?' — '+e(v.note):'')+'</small></div><b>'+fmt(v.net)+'<small>مدفوع '+fmt(v.pd)+'</small></b><button class="x" style="color:var(--tl)" data-op="rcp" data-id="'+v.id+'">📤</button></div>':'<div class="le"><div>💰 دفعة · '+dd(v.d)+' '+tm(v)+(v.note?'<small>'+e(v.note)+'</small>':'')+'<small>إجمالي حسابه: '+fmt((RB[v.id]||{}).t)+' — المديونية بعد الدفعة: '+fmt((RB[v.id]||{}).r)+'</small></div><b>+'+fmt(v.a)+'</b><button class="x" data-op="delpay" data-id="'+v.id+'">✕</button></div>'}).join(""):'')+'</section>'}).join("");
+   return z.k==="v"?'<div class="le"><div>🧾 '+dd(v.d)+' '+tm(v)+'<small>'+e(v.items.map(function(i){return i.n+(i.q>1?" ×"+i.q:"")}).join("، "))+(v.note?' — '+e(v.note):'')+'</small></div><b>'+fmt(v.net)+'<small>مدفوع '+fmt(v.pd)+'</small></b><button class="x" style="color:var(--tl)" data-op="editvisit" data-id="'+v.id+'">✏️</button><button class="x" style="color:var(--tl)" data-op="rcp" data-id="'+v.id+'">📤</button></div>':'<div class="le"><div>💰 دفعة · '+dd(v.d)+' '+tm(v)+(v.note?'<small>'+e(v.note)+'</small>':'')+'<small>إجمالي حسابه: '+fmt((RB[v.id]||{}).t)+' — المديونية بعد الدفعة: '+fmt((RB[v.id]||{}).r)+'</small></div><b>+'+fmt(v.a)+'</b><button class="x" data-op="delpay" data-id="'+v.id+'">✕</button></div>'}).join(""):'')+'</section>'}).join("");
  $("mf").innerHTML=h;rod()}
 function sv(){$("mlist").classList.toggle("hide",!!cur);$("mf").classList.toggle("hide",!cur);if(cur)rmf();else rml()}
 $("mq").addEventListener("input",function(){mq=this.value.trim().toLowerCase();rml()});
@@ -385,6 +385,7 @@ $("mv").addEventListener("click",function(ev){var b=ev.target.closest("[data-op]
   else if(o==="rem"){window.open("https://wa.me/"+wph(n)+"?text="+encodeURIComponent("مرحباً "+n+"، تذكير بالمبلغ المتبقي "+fmt(b.dataset.b)+" ج.م لدى Elsharkawy Dental Clinic. شكراً لك"))}
   else if(o==="acc"){goAcc(cur)}
   else if(o==="accn"){goAcc(n)}
+  else if(o==="editvisit"){var ev0=S.visits.filter(function(v){return v.id===b.dataset.id})[0];if(!ev0)return;if(S.cart.items.length&&!confirm("الحساب الحالي هيتمسح، متأكد؟"))return;S.visits=S.visits.filter(function(v){return v!==ev0});S.cart={items:ev0.items.map(function(y){return{id:id(),sid:"",n:y.n,p:y.p,q:y.q}}),disc:ev0.disc||"",paid:ev0.r?ev0.pd:"",pt:ev0.pt,t0:ev0.t,vn:ev0.note||""};$("dt").value=ev0.d;save();cur=null;tab(2);$("cartd").open=true;$("cart").scrollIntoView({behavior:"smooth"})}
   else if(o==="rname"){var nn=$("rnn").value.trim();if(!nn||nn===cur)return;var pd0=pdata(nn),ex=S.prof[nn]||pd0.V.length||pd0.P.length;
    if(!confirm(ex?"الاسم "+nn+" موجود، هيتم دمج الملفين. تكمل؟":"تغيير الاسم إلى "+nn+"؟"))return;
    nt("✏️ "+(ex?"دمج ":"تغيير اسم ")+cur+" ← "+nn);
