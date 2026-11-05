@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elsharkawy Dental Clinic</title>
+<style>
+:root{--bg:#f4f7f9;--card:#fff;--tx:#14202b;--mu:#6a7a88;--bd:#dbe3e9;--nv:#1a3552;--tl:#1f6f6a;--tl2:#e6f1f0;--rd:#c0392b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1720;--card:#18222d;--tx:#e8eef3;--mu:#93a3b1;--bd:#2a3744;--nv:#12263d;--tl:#3aa59e;--tl2:#1a2f33;--rd:#e5675a;color-scheme:dark}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;font-size:15px}
+header{background:var(--nv);color:#fff;padding:14px 14px 0;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+header h1{margin:0 0 10px;font-size:18px}
+.tabs{display:flex;gap:6px}
+.tabs button{flex:1;padding:10px;border:0;border-radius:10px 10px 0 0;background:transparent;color:#cfe0ee;font:inherit;font-weight:600}
+.tabs button.on{background:var(--bg);color:var(--nv)}
+@media (prefers-color-scheme:dark){.tabs button.on{color:var(--tx)}}
+main{padding:12px;max-width:760px;margin:auto}
+section,.box{background:var(--card);border:1px solid var(--bd);border-radius:12px;margin-bottom:14px;overflow:hidden}
+.ch{display:flex;gap:6px;background:var(--tl);padding:8px}
+.ch input{flex:1;background:transparent;border:0;color:#fff;font-weight:700;font-size:16px}
+.row{display:grid;grid-template-columns:1fr 70px 82px 30px;gap:6px;padding:8px;border-top:1px solid var(--bd);align-items:center}
+input,select{font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:8px;min-width:0;width:100%}
+.row .n{grid-column:1/-1}
+.row{grid-template-columns:1fr 70px 82px 30px}
+.row .n{grid-column:1/5}
+button{font:inherit;cursor:pointer}
+.x{border:0;background:transparent;color:var(--rd);font-size:18px}
+.add{display:block;width:100%;border:0;border-top:1px solid var(--bd);background:var(--tl2);color:var(--tl);padding:10px;font-weight:700}
+.big{display:block;width:100%;border:0;border-radius:10px;background:var(--tl);color:#fff;padding:12px;font-weight:700;margin-top:8px}
+.form{padding:10px;display:grid;gap:8px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+label{font-size:12px;color:var(--mu);display:block;margin-bottom:3px}
+.ph{background:var(--tl2);padding:8px 10px;display:flex;justify-content:space-between;font-weight:700;color:var(--tl)}
+.le{display:flex;gap:8px;padding:8px 10px;border-top:1px solid var(--bd);align-items:center}
+.le div{flex:1}.le small{color:var(--mu);display:block}
+.tot{background:var(--nv);color:#fff;padding:12px;border-radius:12px;display:flex;justify-content:space-between;font-weight:700;margin-bottom:8px}
+.mu{color:var(--mu);text-align:center;padding:14px}
+.hide{display:none}
+.lvp{padding-bottom:76px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+.chip{white-space:nowrap;border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:20px;padding:6px 12px}
+.chip.on{background:var(--tl);color:#fff;border-color:var(--tl)}
+#sl{max-height:46vh;overflow-y:auto;border-top:1px solid var(--bd)}
+.cg{background:var(--tl2);color:var(--tl);font-weight:700;padding:6px 10px;font-size:13px;position:sticky;top:0}
+.sv{display:flex;align-items:center;gap:8px;padding:10px;border-top:1px solid var(--bd);cursor:pointer}
+.sv:active{background:var(--tl2)}
+.sn{flex:1}.sn small,.mu2{color:var(--mu);font-size:12px;display:block}
+.sp{font-weight:700;white-space:nowrap}
+.bg{background:var(--tl);color:#fff;border-radius:10px;padding:1px 6px;font-size:12px;margin-inline-start:6px}
+.pl{width:28px;height:28px;border-radius:50%;background:var(--tl);color:#fff;display:grid;place-items:center;font-weight:700}
+.ci{padding:10px;border-top:1px solid var(--bd)}
+.ct{display:flex;justify-content:space-between;gap:8px;margin-bottom:6px}
+.cr{display:flex;gap:8px;align-items:center}.cr input{width:90px}
+.st{display:flex;align-items:center;gap:10px}.st button{width:32px;height:32px;border-radius:50%;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font-size:18px}
+.lt{margin-inline-start:auto;font-weight:700}
+.sr{display:flex;justify-content:space-between;padding:4px 0}.tt{font-weight:700;font-size:17px;border-top:1px dashed var(--bd);padding-top:8px}.rd{color:var(--rd);font-weight:700}
+.lk{border:0;background:transparent;color:var(--rd)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(80px,1fr));gap:8px;margin-bottom:12px}
+.stats div{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:8px;text-align:center}.stats small{color:var(--mu);display:block;font-size:12px}.stats b{font-size:16px}
+.rdc b{color:var(--rd)}
+.hd{margin:16px 0 8px}
+.va{display:flex;border-top:1px solid var(--bd)}.va button{flex:1;border:0;background:transparent;padding:10px;color:var(--tl)}.va .dl{color:var(--rd)}
+.sm{font-size:13px;color:var(--mu)}
+.fb{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));background:var(--nv);color:#fff;border-radius:14px;padding:12px 14px;display:flex;justify-content:space-between;gap:8px;z-index:6;box-shadow:0 4px 14px #0004;cursor:pointer}
+.fb.hide{display:none}
+header h1{margin:0;font-size:19px;direction:ltr;text-align:right}
+.dr{direction:ltr;text-align:right;font-size:13px;opacity:.85;margin:2px 0 10px}
+.ch{display:flex;align-items:center;gap:10px;background:var(--tl);color:#fff;padding:12px;cursor:pointer}
+.ch .cn{flex:1;font-size:16px}.ch .cnt{background:#ffffff33;border-radius:12px;padding:1px 9px;font-size:13px}
+.hb{width:30px;height:30px;border-radius:50%;border:0;background:#fff;color:var(--tl);font-size:20px;font-weight:700;line-height:1}
+.ce{display:flex;gap:6px;padding:8px;background:var(--tl2)}
+.ce input{font-weight:700}.ce button{white-space:nowrap;border:0;background:transparent;color:var(--rd)}
+.pi{padding:10px;border-top:1px solid var(--bd)}
+.pr2{display:grid;grid-template-columns:1fr 1fr auto;gap:6px;margin-top:6px;align-items:center}
+.pi .x{font-size:14px}
+textarea{font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:8px;width:100%;resize:none}
+.ck{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--tx)}.ck input{width:auto}
+.dg{display:flex;gap:6px}.dg select{width:70px;padding:8px 4px}
+.dt summary{padding:12px;font-weight:700;color:var(--tl);cursor:pointer}.dt[open] summary{border-bottom:1px solid var(--bd)}
+.tabs button{font-size:14px;padding:10px 4px}
+.lock{position:fixed;inset:0;z-index:99;background:var(--nv);color:#fff;display:grid;place-items:center;text-align:center}.lock.hide{display:none}
+.lock input{text-align:center;font-size:28px;letter-spacing:12px;width:190px;margin-top:10px}
+.bk{display:block;border:0;background:transparent;color:var(--tl);font-weight:700;padding:6px 0;margin-bottom:8px}.pr{cursor:pointer}
+.cks{display:flex;flex-wrap:wrap;gap:6px}.cks .ck{background:var(--bg);border:1px solid var(--bd);border-radius:16px;padding:6px 10px}
+.bell{position:absolute;left:12px;top:12px;background:#ffffff22;border:0;border-radius:50%;width:38px;height:38px;color:#fff;font-size:18px}
+.bb{position:absolute;top:-4px;right:-4px;background:var(--rd);color:#fff;border-radius:10px;font-size:11px;padding:1px 5px}.bb.hide{display:none}
+.np{position:fixed;left:8px;right:8px;top:56px;max-height:70vh;overflow:auto;background:var(--card);border:1px solid var(--bd);border-radius:12px;z-index:8;box-shadow:0 6px 20px #0005}.np.hide{display:none}
+.teeth{display:grid;grid-template-columns:repeat(16,1fr);gap:2px;direction:ltr;margin-top:8px}.th{aspect-ratio:1;border:1px solid var(--bd);border-radius:4px;background:var(--bg);font-size:9px;color:var(--tx);padding:0}
+</style>
+</head>
+<body>
+<div id="lk" class="lock"><div><h2>Elsharkawy Dental Clinic</h2><div style="opacity:.8;margin-bottom:14px">Dr. Amr Atef</div><div>اكتب رمز الأمان</div><input id="lc" type="password" inputmode="numeric" maxlength="4" autocomplete="off"><div id="le2" style="margin-top:8px;color:#ffb4a8"></div></div></div>
+<header><button id="bell" class="bell">🔔<span id="bb" class="bb hide"></span></button><button id="undo" class="bell" style="left:58px">↩</button><h1>Elsharkawy Dental Clinic</h1><div class="dr">Dr. Amr Atef</div><div id="ss" class="dr" style="direction:rtl;margin:-6px 0 10px;font-size:12px;opacity:.85"></div>
+<div class="tabs"><button id="t3" class="on">المرضى</button><button id="t2">حساب الخدمات</button><button id="t1">قائمة الأسعار</button></div></header>
+<div id="np" class="np hide"><div class="ph"><span>🔔 الإشعارات</span><span><button class="lk" id="nclr">مسح الكل</button> <button class="lk" id="ncl">✕</button></span></div><div id="nl"></div></div>
+<main>
+<div id="pv" class="hide"><div class="box"><div class="form"><input id="pq" type="search" placeholder="🔍 ابحث في الخدمات..."></div></div>
+<details class="box dt" id="ad"><summary>➕ إضافة خدمة جديدة</summary><div class="form"><div><label>اسم الخدمة</label><input id="an" placeholder="اسم الخدمة"></div><div class="g2"><div><label>السعر (ج.م)</label><input type="number" id="apr" inputmode="decimal"></div><div><label>الوحدة</label><input id="au" value="سن"></div></div><div><label>القسم</label><select id="acat"></select></div><div id="anw" class="hide"><label>اسم القسم الجديد</label><input id="anc" placeholder="اسم القسم"></div><div id="am" class="mu2"></div><button class="big" id="aa">إضافة</button></div></details>
+<details class="box dt"><summary>📈 زيادة الأسعار</summary><div class="form"><div class="g2"><div><label>نسبة الزيادة %</label><input type="number" id="ip" inputmode="decimal" placeholder="مثلاً 10"></div><div><label>تطبق على</label><select id="is"></select></div></div><label class="ck"><input type="checkbox" id="ir" checked> تقريب لأقرب 5 جنيه</label><div id="iv" class="mu2"></div><button class="big" id="ia">تطبيق الزيادة</button><button class="lk" id="iu" hidden>↩ تراجع عن آخر زيادة</button></div></details>
+<div id="pc"></div></div>
+<div id="lv" class="hide lvp">
+ <div id="pw"></div><details class="box dt"><summary>👤 المريض والتاريخ</summary><div class="form"><div class="g2"><div><label>التاريخ</label><input type="date" id="dt"></div><div><label>اسم المريض</label><input id="pt" placeholder="اسم المريض" list="pl"><datalist id="pl"></datalist></div></div></div></details>
+ <div id="pb"></div><details class="box dt" id="svd"><summary>🦷 اختيار الخدمات</summary><div class="form"><input id="sq" type="search" placeholder="🔍 ابحث عن خدمة..."><div class="chips" id="chips"></div></div><div id="sl"></div></details>
+ <details class="box dt" id="cartd"><summary>🧾 الحساب الحالي</summary><div id="cart"></div></details>
+ <details class="box dt"><summary>📅 حسابات اليوم</summary><div id="hist" class="form"></div></details>
+ <div id="fb" class="fb hide"></div>
+</div>
+<div id="mv"><div id="mlist"><details class="box dt" id="npd"><summary>➕ مريض جديد</summary><div id="npf"></div></details><details class="box dt" id="dbd"><summary id="dbs">💳 المديونيات</summary><div id="dbl"></div></details><details class="box dt"><summary>💾 نسخة احتياطية / نقل لتلفون تاني</summary><div class="form"><div class="g2"><button class="big" id="bkx">⬇️ تصدير ملف</button><button class="big" id="bkc">📋 نسخ البيانات</button></div><div><label>استيراد: اختار ملف أو الصق البيانات</label><input type="file" id="bkf" accept=".json,application/json"></div><textarea id="bkt" rows="2" placeholder="الصق البيانات هنا"></textarea><div class="g2"><button class="big" id="bkr">♻️ استبدال</button><button class="big" id="bkm">🔀 دمج</button></div><div class="mu2">لنقل البيانات لتلفون تاني: صدّر من الأول واستورد بـ"دمج" في التاني.</div></div></details>
+<details class="box dt" id="rpd"><summary>📊 تقرير شهري</summary><div class="form"><input type="month" id="rm"><div id="rb"></div><button class="big" id="rsh">📤 مشاركة التقرير</button></div></details><div class="box"><div class="form"><input id="mq" type="search" placeholder="🔍 ابحث باسم المريض..."></div></div><div id="ml"></div></div><div id="mf" class="hide"></div></div>
+<div class="mu2" style="text-align:center;padding:14px 0">Elsharkawy Dental Clinic · Dr. Amr Atef</div></main>
+<script>
+var D=[["حشو تجميلي وترميمي",[["حشو تجميلي (كمبوزيت) - سن أمامي","سن",1500],["حشو تجميلي (كمبوزيت) - ضرس خلفي عادي","ضرس",1000],["حشو تجميلي - ضرس كبير (3 أسطح فأكثر)","ضرس",1300],["إضافة EverX Posterior (فقط)","ضرس",300],["إضافة قاعدة MTA / Biodentine (فقط)","ضرس",300],["بناء ضرس (Core Build-up) بدون وتد فايبر","ضرس",1000],["بناء ضرس بوتد فايبر (Fiber Post)","ضرس",1500]]],
+["الكراونات - E-MAX",[["Veneer or crown or Lumineer (Layering effect added) (Ivoclar)","—",4200],["Veneer or crown or Lumineer (staining added)","—",3600],["Endo crown E-max","—",3000],["Onlay & Inlay","—",3300]]],
+["الكراونات - ZIRCONIA",[["Crown Full anatomic","—",2250],["Crown Zircon (Layering Technique)","—",2700],["Crown Zircon E-max","—",2850],["E max ZirCad prime","—",2850],["Zolid FX Multi-layer","—",4500],["Bio HPP (over Zirconia crowns)","—",9000]]],
+["الكراونات - PFM",[["Crown Porcelain Vita VM13 (Direct Metal Laser Sintering)","—",1200]]],
+["الكراونات - SERVICES",[["Digital Impression (3SHAPE)","—",7500],["3D printed Upper & lower model","—",2400],["3D printed Digital mock up","—",3000]]],
+["علاج عصب",[["علاج عصب - سن أمامي","سن",1700],["علاج عصب - ضرس كبير (Molar)","ضرس",2000],["إعادة علاج عصب (Retreatment)","ضرس",2500],["سد قمة الجذر بال MTA (Apexification)","سن",2500],["إصلاح ثقب جذري بال MTA","ضرس",500],["تبييض سن ميت (داخلي)","سن",800],["تكلسات في الجذور","الجذر الواحد",700]]],
+["لثة",[["تنظيف + تلميع + إزالة تصبغات (AirFlow)","جلسة",800],["إزالة لثة زائدة بالليزر (Gingivectomy)","سن",600]]],
+["أطفال",[["حشو سن لبني","سن",600],["حشو سن لبني تجميلي","سن",600],["عصب جزئي (Pulpotomy)","سن",600],["عصب كلي (Pulpectomy)","سن",800],["تاج ستانلس ستيل","سن",700],["حافظ مسافة (Space Maintainer)","جهاز",800],["سيلانت (Fissure Sealant)","ضرس",300],["فلوراد موضعي","جلسة",300],["علاج تحت مهدئ / تخدير كلي","جلسة",5000]]]];
+var K="elsharkawy_state_v1",uid=0,S=null;
+function id(){return "i"+Date.now().toString(36)+(uid++)}
+function load(){try{var r=localStorage.getItem(K);if(r){S=JSON.parse(r)}}catch(e){}
+ if(!S||!S.cats){S={cats:D.map(function(c){return{id:id(),name:c[0],items:c[1].map(function(i){return{id:id(),n:i[0],u:i[1],p:i[2]}})}}),log:[]}}}
+function save(){try{localStorage.setItem(K,JSON.stringify(S));LS=Date.now();ss()}catch(e){}if(!pend){clearTimeout(tb);tb=setTimeout(cp,1500)}if(typeof scheduleCloudSync==="function")scheduleCloudSync() }
+function e(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;")}
+function fmt(n){return Number(n||0).toLocaleString("en-US")}
+function find(i){for(var a=0;a<S.cats.length;a++)for(var b=0;b<S.cats[a].items.length;b++)if(S.cats[a].items[b].id===i)return S.cats[a].items[b]}
+function cat(i){return S.cats.filter(function(c){return c.id===i})[0]}
+var $=function(x){return document.getElementById(x)};
+
+var op={},pq="";
+function np(x,p){var v=x*(1+p/100);return $("ir").checked?Math.round(v/5)*5:Math.round(v)}
+function ipv(){var p=parseFloat($("ip").value),sc=$("is").value,x=null;S.cats.forEach(function(c){if(x===null&&(!sc||c.id===sc)&&c.items.length)x=c.items[0].p});
+ $("iv").textContent=(p&&x!==null)?"مثال: "+fmt(x)+" ← "+fmt(np(x,p))+" ج.م":"اكتب النسبة (مثلاً 10 للزيادة أو -5 للتخفيض)";
+ $("iu").hidden=!(S.undo&&Object.keys(S.undo).length)}
+$("ia").onclick=function(){var p=parseFloat($("ip").value);if(!p){alert("اكتب نسبة الزيادة");return}
+ var sc=$("is").value,n=0;if(!confirm("تطبيق "+p+"% على "+(sc?cat(sc).name:"كل الأقسام")+"؟"))return;
+ S.undo={};S.cats.forEach(function(c){if(sc&&c.id!==sc)return;c.items.forEach(function(i){S.undo[i.id]=i.p;i.p=np(i.p,p);n++})});
+ nt("📈 زيادة الأسعار "+p+"% على "+(sc?cat(sc).name:"كل الأقسام")+" ("+n+" خدمة)");$("ip").value="";rp();ipv();$("iv").textContent="✅ تم تعديل أسعار "+n+" خدمة"};
+$("iu").onclick=function(){if(!confirm("التراجع عن آخر زيادة؟"))return;Object.keys(S.undo).forEach(function(k){var i=find(k);if(i)i.p=S.undo[k]});S.undo=null;nt("↩ تراجع عن آخر زيادة أسعار");rp();ipv()};
+$("aa").onclick=function(){var n=$("an").value.trim();if(!n){alert("اكتب اسم الخدمة");return}
+ var cid=$("acat").value,c;
+ if(cid==="__new"){var cn=$("anc").value.trim();if(!cn){alert("اكتب اسم القسم");return}c={id:id(),name:cn,items:[]};S.cats.push(c)}else c=cat(cid);
+ if(!c){alert("اختار القسم");return}
+ c.items.push({id:id(),n:n,u:$("au").value.trim()||"سن",p:parseFloat($("apr").value)||0});
+ nt("➕ خدمة جديدة: "+n+" — "+fmt(parseFloat($("apr").value)||0)+" ج.م ("+c.name+")");op[c.id]=true;pq="";$("pq").value="";$("an").value="";$("apr").value="";$("anc").value="";save();
+ rp();$("acat").value=c.id;$("anw").classList.add("hide");$("am").textContent="✅ اتضافت: "+n};
+function rp(){var c2=$("acat").value;$("acat").innerHTML=S.cats.map(function(c){return '<option value="'+c.id+'">'+e(c.name)+'</option>'}).join("")+'<option value="__new">➕ قسم جديد...</option>';if(c2)$("acat").value=c2;var cv=$("is").value;$("is").innerHTML='<option value="">كل الأقسام</option>'+S.cats.map(function(c){return '<option value="'+c.id+'">'+e(c.name)+'</option>'}).join("");$("is").value=cv;var h="";S.cats.forEach(function(c){
+ var it=c.items.filter(function(i){return !pq||(i.n+" "+i.u).toLowerCase().indexOf(pq)>-1});
+ if(pq&&!it.length)return;var o=pq||op[c.id];
+ h+='<section><div class="ch" data-t="'+c.id+'"><span>'+(o?'▾':'◂')+'</span><b class="cn">'+e(c.name)+'</b><span class="cnt">'+c.items.length+'</span></div>';
+ if(o)h+='<div class="ce"><input data-k="cn" data-c="'+c.id+'" value="'+e(c.name)+'"><button data-a="dc" data-c="'+c.id+'">🗑 حذف القسم</button></div>'+
+  it.map(function(i){return '<div class="pi"><textarea rows="2" data-k="n" data-i="'+i.id+'">'+e(i.n)+'</textarea><div class="pr2"><input data-k="u" data-i="'+i.id+'" value="'+e(i.u)+'" placeholder="الوحدة"><input type="number" inputmode="decimal" data-k="p" data-i="'+i.id+'" value="'+e(i.p)+'" placeholder="السعر ج.م"><button class="x" data-a="di" data-i="'+i.id+'">🗑 حذف</button></div></div>'}).join("");
+ h+='</section>'});
+ $("pc").innerHTML=h}
+$("pv").addEventListener("input",function(ev){var t=ev.target,k=t.dataset.k;
+ if(t.id==="acat"){$("anw").classList.toggle("hide",t.value!=="__new");return}
+ if(t.id==="pq"){pq=t.value.trim().toLowerCase();rp();return}
+ if(t.id==="ip"||t.id==="ir"||t.id==="is"){ipv();return}
+ if(!k)return;
+ if(k==="cn"){cat(t.dataset.c).name=t.value;var h=document.querySelector('[data-t="'+t.dataset.c+'"] .cn');if(h)h.textContent=t.value}
+ else{var i=find(t.dataset.i);if(!i)return;if(k==="p"&&!(i.id in po)){po[i.id]=i.p;hold()}i[k]=k==="p"?(parseFloat(t.value)||0):t.value}save()});
+$("pv").addEventListener("click",function(ev){var t=ev.target,b=t.closest("[data-a]"),nf="";
+ if(!b){var h=t.closest("[data-t]");if(h){op[h.dataset.t]=!op[h.dataset.t];rp()}return}
+ var a=b.dataset.a;
+ if(a==="ai"){nf=id();cat(b.dataset.c).items.push({id:nf,n:"",u:"سن",p:0});op[b.dataset.c]=true}
+ else if(a==="ac"){var c={id:id(),name:"قسم جديد",items:[]};S.cats.push(c);op[c.id]=true}
+ else if(a==="di"){if(!confirm("حذف الخدمة؟",b.dataset.i))return;var it0=find(b.dataset.i);nt("🗑 حذف خدمة: "+(it0?it0.n:""));S.cats.forEach(function(c){c.items=c.items.filter(function(i){return i.id!==b.dataset.i})})}
+ else if(a==="dc"){if(!confirm("حذف القسم بكل خدماته؟",b.dataset.c))return;var c0=cat(b.dataset.c);nt("🗑 حذف قسم: "+(c0?c0.name:""));S.cats=S.cats.filter(function(c){return c.id!==b.dataset.c})}
+ save();rp();
+ if(nf){var el=document.querySelector('textarea[data-i="'+nf+'"]');if(el){el.placeholder="اسم الخدمة";el.focus()}}});
+var ac="",sq="";
+function nc(){return{items:[],disc:"",paid:"",pt:""}}
+function today(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function migrate(){S.visits=S.visits||[];S.pays=S.pays||[];S.prof=S.prof||{};S.nt=S.nt||[];if(!S.cart||!S.cart.items)S.cart=nc();
+ if(S.log&&S.log.length){var g={};S.log.forEach(function(x){var k=x.d+"|"+x.pt;(g[k]=g[k]||[]).push(x)});Object.keys(g).forEach(function(k){var a=g[k],t=a.reduce(function(m,x){return m+x.p*x.q},0);S.visits.push({id:id(),d:a[0].d,pt:a[0].pt,items:a.map(function(x){return{n:x.n,p:x.p,q:x.q}}),disc:0,sub:t,net:t,pd:t,r:0})})}
+ var cr=S.cats.filter(function(c){return c.name.indexOf("الكراونات")===0});
+ if(cr.length>1||(cr.length===1&&cr[0].name!=="الكراونات")){var m=cr[0];m.name="الكراونات";cr.slice(1).forEach(function(c){m.items=m.items.concat(c.items)});S.cats=S.cats.filter(function(c){return cr.indexOf(c)<1})}
+ if(!S.kashf){S.kashf=1;if(!S.cats.some(function(c){return c.name==="الكشف"}))S.cats.unshift({id:id(),name:"الكشف",items:[{id:id(),n:"كشف",u:"كشف",p:200}]})}
+ delete S.log;save()}
+function sums(){var s=0;S.cart.items.forEach(function(x){s+=x.p*x.q});var dv=parseFloat(S.cart.disc)||0,d=S.cart.dt==="pct"?Math.round(s*Math.min(dv,100)/100):dv,n=Math.max(s-d,0),pd=S.cart.paid===""?n:(parseFloat(S.cart.paid)||0);return{s:s,d:d,n:n,pd:pd,r:Math.max(n-pd,0)}}
+function pl(){var u={};S.visits.forEach(function(v){if(v.pt)u[v.pt]=1});$("pl").innerHTML=Object.keys(u).map(function(k){return '<option value="'+e(k)+'">'}).join("")}
+function rchips(){$("chips").innerHTML=[["","الكل"]].concat(S.cats.map(function(c){return[c.id,c.name]})).map(function(c){return '<button class="chip'+(ac===c[0]?' on':'')+'" data-chip="'+c[0]+'">'+e(c[1])+'</button>'}).join("")}
+function rs(){var h="";S.cats.forEach(function(c){if(ac&&ac!==c.id)return;var it=c.items.filter(function(i){return !sq||(i.n+" "+c.name).toLowerCase().indexOf(sq)>-1});if(!it.length)return;
+ if(!ac)h+='<div class="cg">'+e(c.name)+'</div>';
+ h+=it.map(function(i){var k=S.cart.items.filter(function(x){return x.sid===i.id}).reduce(function(m,x){return m+x.q},0);
+  return '<div class="sv" data-s="'+i.id+'"><div class="sn">'+e(i.n)+'<small>'+e(i.u)+'</small></div><div class="sp">'+fmt(i.p)+(k?'<b class="bg">×'+k+'</b>':'')+'</div><span class="pl">+</span></div>'}).join("")});
+ $("sl").innerHTML=h||'<div class="mu">مفيش نتايج</div>'}
+function rc(){var it=S.cart.items,h='<div class="ph"><span>🧾 الحساب الحالي</span>'+(it.length?'<button class="lk" data-clr="1">مسح الكل</button>':'')+'</div>';
+ if(!it.length){h+='<div class="mu">اضغط على أي خدمة من القائمة لإضافتها</div>'}
+ else{h+=it.map(function(x){return '<div class="ci"><div class="ct"><span>'+e(x.n)+'</span><button class="x" data-rm="'+x.id+'">✕</button></div><div class="cr"><div class="st"><button data-q="-1" data-i="'+x.id+'">−</button><b>'+x.q+'</b><button data-q="1" data-i="'+x.id+'">+</button></div><input type="number" inputmode="decimal" data-k="cp" data-i="'+x.id+'" value="'+e(x.p)+'"><span class="lt" id="lt'+x.id+'">'+fmt(x.p*x.q)+'</span></div></div>'}).join("")+
+ '<div class="form"><div class="g2"><div><label>خصم</label><div class="dg"><input type="number" inputmode="decimal" data-k="disc" value="'+e(S.cart.disc)+'"><select data-k="dt"><option value="egp"'+(S.cart.dt!=="pct"?' selected':'')+'>ج.م</option><option value="pct"'+(S.cart.dt==="pct"?' selected':'')+'>%</option></select></div></div><div><label>المدفوع (فاضي = دفع كامل)</label><input type="number" inputmode="decimal" data-k="paid" value="'+e(S.cart.paid)+'"></div></div><input data-k="vn" placeholder="ملاحظات الزيارة (رقم السن، الإجراء...)" value="'+e(S.cart.vn)+'" style="margin:6px 0"><div id="sm"></div><button class="big" data-save="1">💾 حفظ الحساب</button></div>'}
+ $("cart").innerHTML=h;rt()}
+function rt(){var t=sums();
+ S.cart.items.forEach(function(x){var el=$("lt"+x.id);if(el)el.textContent=fmt(x.p*x.q)});
+ var sm=$("sm");if(sm)sm.innerHTML='<div class="sr"><span>المجموع</span><span>'+fmt(t.s)+'</span></div>'+(t.d?'<div class="sr"><span>الخصم</span><span>− '+fmt(t.d)+'</span></div>':'')+'<div class="sr tt"><span>الإجمالي</span><span>'+fmt(t.n)+' ج.م</span></div>'+(t.r?'<div class="sr rd"><span>المتبقي</span><span>'+fmt(t.r)+' ج.م</span></div>':'');
+ var n=S.cart.items.reduce(function(m,x){return m+x.q},0),fb=$("fb");fb.classList.toggle("hide",!n);fb.innerHTML='<span>🧾 '+n+' خدمة</span><b>'+fmt(t.n)+' ج.م</b><span>عرض الحساب ↑</span>'}
+function rh(){var d=$("dt").value,m=d.slice(0,7),V=S.visits.filter(function(v){return v.d===d}).reverse(),n=0,c=0,r=0;
+ V.forEach(function(v){n+=v.net;c+=v.pd;r+=v.r});
+ var mt=S.visits.filter(function(v){return v.d.slice(0,7)===m}).reduce(function(t,v){return t+v.net},0);
+ var h='<div class="stats"><div><small>المرضى</small><b>'+V.length+'</b></div><div><small>الإجمالي</small><b>'+fmt(n)+'</b></div><div><small>المحصّل</small><b>'+fmt(c)+'</b></div>'+(r?'<div class="rdc"><small>متبقي</small><b>'+fmt(r)+'</b></div>':'')+'</div>';
+ h+=V.length?V.map(function(v){return '<div class="box"><div class="ph"><span>👤 '+e(v.pt||"بدون اسم")+(v.t?' <small class="mu2" style="display:inline">'+tm(v)+'</small>':'')+'</span><span>'+fmt(v.net)+' ج.م</span></div>'+v.items.map(function(x){return '<div class="le"><div>'+e(x.n)+'</div><span class="mu2">'+x.q+' × '+fmt(x.p)+'</span><b>'+fmt(x.p*x.q)+'</b></div>'}).join("")+(v.disc?'<div class="le sm"><div>خصم</div><b>− '+fmt(v.disc)+'</b></div>':'')+(v.r?'<div class="le sm rd"><div>متبقي</div><b>'+fmt(v.r)+'</b></div>':'')+'<div class="va"><button data-ve="'+v.id+'">✏️ تعديل</button><button class="dl" data-vd="'+v.id+'">🗑 حذف</button></div></div>'}).join(""):'<div class="mu">مفيش حسابات متسجلة في اليوم ده</div>';
+ h+='<div class="mu">إجمالي الشهر: <b>'+fmt(mt)+' ج.م</b></div>';$("hist").innerHTML=h}
+function rv(){if(!$("dt").value)$("dt").value=today();$("pt").value=S.cart.pt||"";pwarn();pl();rchips();rs();rc();rh()}
+$("lv").addEventListener("input",function(ev){var t=ev.target,k=t.dataset.k;
+ if(t.id==="sq"){sq=t.value.trim().toLowerCase();rs();return}
+ if(t.id==="dt"){rh();return}
+ if(t.id==="pt"){S.cart.pt=t.value;save();pwarn();return}
+ if(!k)return;
+ if(k==="cp"){var x=S.cart.items.filter(function(y){return y.id===t.dataset.i})[0];x.p=parseFloat(t.value)||0}else S.cart[k]=t.value;
+ save();rt()});
+$("lv").addEventListener("click",function(ev){var t=ev.target,b,x;
+ if(b=t.closest("[data-s]")){var i=find(b.dataset.s);if(!i)return;x=S.cart.items.filter(function(y){return y.sid===i.id&&y.p===i.p})[0];if(x)x.q++;else S.cart.items.push({id:id(),sid:i.id,n:i.n,p:i.p,q:1});save();rc();rs()}
+ else if(b=t.closest("[data-chip]")){ac=b.dataset.chip;rchips();rs()}
+ else if(b=t.closest("[data-q]")){x=S.cart.items.filter(function(y){return y.id===b.dataset.i})[0];x.q+=parseInt(b.dataset.q);if(x.q<1)S.cart.items=S.cart.items.filter(function(y){return y!==x});save();rc();rs()}
+ else if(b=t.closest("[data-rm]")){S.cart.items=S.cart.items.filter(function(y){return y.id!==b.dataset.rm});save();rc();rs()}
+ else if(t.closest("[data-clr]")){if(confirm("مسح الحساب الحالي؟")){var p=S.cart.pt;S.cart=nc();S.cart.pt=p;save();rc();rs()}}
+ else if(t.closest("[data-save]")){var s=sums(),pt=canon($("pt").value.trim());if(!S.cart.items.length)return;if(!pt&&!confirm("مفيش اسم مريض، تحفظ كده؟"))return;
+  S.visits.push({id:id(),d:$("dt").value||today(),t:S.cart.t0||Date.now(),pt:pt,items:S.cart.items.map(function(y){return{n:y.n,p:y.p,q:y.q}}),disc:s.d,sub:s.s,net:s.n,pd:s.pd,r:s.r,note:S.cart.vn||""});
+  nt("🧾 حساب جديد: "+(pt||"بدون اسم")+" — "+fmt(s.n)+" ج.م");S.cart=nc();save();rv();$("hist").scrollIntoView({behavior:"smooth"})}
+ else if(b=t.closest("[data-vd]")){if(!confirm("حذف الحساب ده؟",b.dataset.vd))return;var v0=S.visits.filter(function(v){return v.id===b.dataset.vd})[0];nt("🗑 حذف حساب "+(v0?pn(v0)+" — "+fmt(v0.net)+" ج.م":""));S.visits=S.visits.filter(function(v){return v.id!==b.dataset.vd});save();pl();rh()}
+ else if(b=t.closest("[data-ve]")){if(S.cart.items.length&&!confirm("الحساب الحالي هيتمسح، متأكد؟"))return;var v=S.visits.filter(function(y){return y.id===b.dataset.ve})[0];
+  S.visits=S.visits.filter(function(y){return y!==v});S.cart={items:v.items.map(function(y){return{id:id(),sid:"",n:y.n,p:y.p,q:y.q}}),disc:v.disc||"",paid:v.r?v.pd:"",pt:v.pt,t0:v.t,vn:v.note||""};$("dt").value=v.d;save();rv();$("cartd").open=true;$("cart").scrollIntoView({behavior:"smooth"})}
+ else if(t.closest("[data-cpt]")){S.cart.pt="";$("pt").value="";save();pwarn()}
+ else if(t.closest("#fb")){$("cartd").open=true;$("cart").scrollIntoView({behavior:"smooth"})}});
+var mq="",mo={},cur=null,payopen=false,MN=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+function tm(v){return v.t?new Date(v.t).toLocaleTimeString("ar-EG",{hour:"numeric",minute:"2-digit"}):""}
+function dd(d){return d.split("-").reverse().join("/")}
+function vt(v){return v.t||Date.parse(v.d)||0}
+function mk(d){return d.slice(0,7)}
+function mlab(k){var p=k.split("-");return MN[+p[1]-1]+" "+p[0]}
+function pn(v){return v.pt||"بدون اسم"}
+function pdata(n){var V=S.visits.filter(function(v){return pn(v)===n}),P=S.pays.filter(function(p){return p.pt===n}),t=0,pd=0,pp=0;
+ V.forEach(function(v){t+=v.net;pd+=v.pd});P.forEach(function(p){pp+=p.a});return{V:V,P:P,t:t,paid:pd+pp,bal:t-pd-pp}}
+function bt2(n){var d=pdata(n);return !d.V.length&&!d.P.length?'<span class="mu2" style="display:inline">جديد</span>':bt(d.bal)}
+function bt(b){return b>0?'<span class="rd">مديونية '+fmt(b)+'</span>':'<span>مدفوع ✓</span>'}
+var CND=["سكر","ضغط","أمراض قلب","سيولة الدم / نزيف","ربو","أمراض كلى","كبد / التهاب كبدي","غدة درقية","صرع","مناعة / أورام","أنيميا","حمل / رضاعة"],ALG=["بنسلين","أسبرين / مسكنات","بنج موضعي","لاتكس","يود","مضاد حيوي تاني"];
+function pform(p,m){function I(k,l,t,x){return '<div><label>'+l+'</label><input data-f="'+k+'"'+(t?' type="'+t+'"':'')+(x||'')+' value="'+e(p[k])+'"></div>'}
+ function L(k,l,o){return '<div><label>'+l+'</label><select data-f="'+k+'"><option value="">—</option>'+o.map(function(x){return '<option'+(p[k]===x?' selected':'')+'>'+x+'</option>'}).join("")+'</select></div>'}
+ function K(k,l,o){var z=p[k]||[];return '<div><label>'+l+'</label><div class="cks">'+o.map(function(x){return '<label class="ck"><input type="checkbox" data-g="'+k+'" value="'+x+'"'+(z.indexOf(x)>-1?' checked':'')+'>'+x+'</label>'}).join("")+'</div></div>'}
+ return '<div class="form">'+I("name","اسم المريض *","",m?" readonly":"")+'<div class="g2">'+I("phone","التليفون","tel")+I("age","السن","number")+'</div><div class="g2">'+L("sex","النوع",["ذكر","أنثى"])+I("job","الوظيفة")+'</div>'+I("addr","العنوان")+I("ec","طوارئ: اسم ورقم قريب")+L("ref","عرف العيادة منين؟",["ترشيح من حد","فيسبوك / انستجرام","إعلان","مريض قديم","غير ذلك"])+I("cc","الشكوى الرئيسية")+'<div class="g2">'+I("ap","موعد الزيارة الجاية","datetime-local")+I("apn","ملاحظة الموعد")+'</div>'+K("c","الحالات المرضية",CND)+I("condx","أمراض تانية")+K("a","الحساسية",ALG)+I("algx","حساسية تانية")+I("meds","الأدوية الحالية (سيولة، كورتيزون...)")+I("surg","عمليات سابقة")+I("doc","الطبيب المعالج (اسم ورقم)")+'<div class="g2">'+L("smoke","التدخين",["لا","سجاير","شيشة","الاتنين"])+I("lastv","آخر زيارة لدكتور أسنان")+'</div>'+I("dh","تاريخ الأسنان (نزيف بعد خلع، حساسية بنج، صريف...)")+'<div><label>ملاحظات</label><textarea data-f="note" rows="2">'+e(p.note)+'</textarea></div><label class="ck"><input type="checkbox" data-f="ok"'+(p.ok?' checked':'')+'>المريض أقرّ بصحة البيانات</label><button class="big" data-op="'+(m?'editpt':'newpt')+'">'+(m?'💾 حفظ التعديلات':'💾 حفظ المريض')+'</button></div>'}
+function pget(r){var o={c:[],a:[]};r.querySelectorAll("[data-f]").forEach(function(x){o[x.dataset.f]=x.type==="checkbox"?x.checked:x.value.trim()});r.querySelectorAll("[data-g]:checked").forEach(function(x){o[x.dataset.g].push(x.value)});return o}
+function np0(){$("npf").innerHTML=pform({})}
+function atx(p){if(!p)return"";var a=[],c=(p.c||[]).concat(p.condx?[p.condx]:[]),g=(p.a||[]).concat(p.algx?[p.algx]:[]);if(c.length)a.push("أمراض: "+c.join("، "));if(g.length)a.push("حساسية: "+g.join("، "));if(p.meds)a.push("أدوية: "+p.meds);return a.join(" | ")}
+function wbox(t){return '<div class="tot" style="background:var(--rd);display:block">⚠️ تنبيه طبي<br><small>'+e(t)+'</small></div>'}
+function pwarn(){var n=$("pt").value.trim(),t=atx(S.prof[n]);$("pb").innerHTML=n?'<div class="tot"><span>👤 الحساب لـ: '+e(n)+'</span><button class="x" data-cpt="1" style="color:#fff">✕ مسح</button></div>':"";$("pw").innerHTML=t?wbox(t):""}
+function ac2(n){var p=S.prof[n],t=atx(p),h="";if(!p)return '<div class="box" style="padding:10px">ℹ️ مفيش بيانات صحية للمريض ده، سجلها من "البيانات الصحية".</div>';
+ if(t)h+=wbox(t);if(p.ap)h+='<div class="box" style="padding:10px">📅 الموعد الجاي: '+dd(p.ap.slice(0,10))+' '+p.ap.slice(11)+(p.apn?' — '+e(p.apn):'')+'</div>';if(p.u&&Date.now()-p.u>31536e6)h+='<div class="box" style="padding:10px;color:var(--rd)">التاريخ المرضي اتحدث من أكتر من سنة، راجعه وحدّثه.</div>';return h}
+var DR="Dr. Amr Atef",po={},tool="تسوس",TS={"تسوس":"#e74c3c","حشو":"#3498db","عصب":"#8e44ad","كراون":"#d4a017","مفقود":"#7f8c8d","زرعة":"#27ae60","خلع":"#e67e22"};
+function ld(t){var d=new Date(t);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function nt(x){U.push({t:Date.now(),l:x,j:pend||base});pend=null;if(U.length>10)U.shift();pu();S.nt.unshift({t:Date.now(),x:x});S.nt=S.nt.slice(0,200);save();cp();nb()}
+function nb(){var n=S.nt.filter(function(x){return x.t>(S.seen||0)}).length;$("bb").textContent=n;$("bb").classList.toggle("hide",!n)}
+function rnl(){var td=today(),lim=ld(Date.now()+7*864e5),A=[],h="";Object.keys(S.prof).forEach(function(n){var a=S.prof[n].ap;if(a&&a.slice(0,10)>=td&&a.slice(0,10)<=lim)A.push([a,n])});A.sort();
+ if(A.length)h+='<div class="cg">📅 مواعيد الأسبوع الجاي</div>'+A.map(function(z){return '<div class="le"><div>'+e(z[1])+'<small>'+dd(z[0].slice(0,10))+' '+z[0].slice(11)+(S.prof[z[1]].apn?' — '+e(S.prof[z[1]].apn):'')+'</small></div></div>'}).join("");
+ h+='<div class="cg">🔔 آخر التغييرات</div>'+(S.nt.length?S.nt.map(function(x){return '<div class="le"><div>'+e(x.x)+'<small>'+dd(ld(x.t))+' '+tm(x)+'</small></div></div>'}).join(""):'<div class="mu">مفيش تغييرات لسه</div>');$("nl").innerHTML=h}
+$("bell").onclick=function(){var o=$("np").classList.toggle("hide");if(!o){S.seen=Date.now();save();nb();rnl()}};
+$("ncl").onclick=function(){$("np").classList.add("hide")};
+$("nclr").onclick=function(){if(confirm("مسح كل الإشعارات؟")){S.nt=[];save();nb();rnl()}};
+$("pv").addEventListener("change",function(ev){var t=ev.target;if(t.dataset.k==="p"){var i=find(t.dataset.i);if(i&&i.id in po){if(po[i.id]!==i.p)nt("💲 تعديل سعر: "+i.n+" من "+fmt(po[i.id])+" إلى "+fmt(i.p));else pend=null;delete po[i.id]}}});
+function rod(){var p=S.prof[cur]||{},T=p.teeth||{},U=[18,17,16,15,14,13,12,11,21,22,23,24,25,26,27,28],L=[48,47,46,45,44,43,42,41,31,32,33,34,35,36,37,38];
+ function row(a){return '<div class="teeth">'+a.map(function(x){var z=T[x];return '<button class="th" data-th="'+x+'"'+(z?' style="background:'+TS[z]+';color:#fff"':'')+'>'+x+'</button>'}).join("")+'</div>'}
+ var od=$("od");if(od)od.innerHTML='<div class="cks">'+["سليم"].concat(Object.keys(TS)).map(function(k){return '<button class="chip'+(tool===k?' on':'')+'" data-tl="'+k+'">'+k+'</button>'}).join("")+'</div>'+row(U)+'<div style="height:8px"></div>'+row(L)+'<small class="mu2">اختار الحالة وبعدين دوس على رقم السن</small>'}
+function dash(){var td=today(),m=td.slice(0,7),a=S.visits.filter(function(v){return v.d===td}),b=S.visits.filter(function(v){return mk(v.d)===m}),c=S.pays.filter(function(p){return p.d===td}),d=S.pays.filter(function(p){return mk(p.d)===m}),nm={},o=0;
+ var sm=function(r,k){return r.reduce(function(s,x){return s+x[k]},0)};S.visits.forEach(function(v){nm[pn(v)]=1});Object.keys(nm).forEach(function(n){var q=pdata(n).bal;if(q>0)o+=q});
+ return '<div class="stats"><div><small>مرضى النهارده</small><b>'+a.length+'</b></div><div><small>محصّل النهارده</small><b>'+fmt(sm(a,"pd")+sm(c,"a"))+'</b></div><div><small>حسابات الشهر</small><b>'+fmt(sm(b,"net"))+'</b></div><div><small>محصّل الشهر</small><b>'+fmt(sm(b,"pd")+sm(d,"a"))+'</b></div><div class="rdc"><small>إجمالي المديونيات</small><b>'+fmt(o)+'</b></div></div>'}
+var base=null,pend=null,tb=0,RT="",U=[];try{U=JSON.parse(localStorage.getItem(K+"_u")||"[]")}catch(x){}
+function cp(){base=JSON.stringify(S)}
+function hold(){if(!pend)pend=base}
+function pu(){while(U.length){try{localStorage.setItem(K+"_u",JSON.stringify(U));return}catch(x){U.shift()}}}
+function shr(t){if(navigator.share){navigator.share({text:t}).catch(function(){})}else{window.open("https://wa.me/?text="+encodeURIComponent(t))}}
+function refresh(){if(cur&&!S.prof[cur]&&!S.visits.some(function(v){return pn(v)===cur}))cur=null;nb();rp();ipv();rv();sv();np0()}
+$("undo").onclick=function(){if(!U.length){alert("مفيش حاجة ترجع عنها");return}var z=U[U.length-1];if(!confirm("الرجوع عن: "+z.l+"؟"))return;U.pop();pu();
+ var o=JSON.parse(z.j),keep=z.l.indexOf("🧾")===0?null:S.cart;o.nt=S.nt;o.seen=S.seen;if(keep)o.cart=keep;S=o;
+ S.nt.unshift({t:Date.now(),x:"↩ رجوع عن: "+z.l});pend=null;save();cp();refresh();alert("✅ تم الرجوع")};
+function exp(){var o=JSON.parse(JSON.stringify(S));delete o.nt;return JSON.stringify(o)}
+$("bkx").onclick=function(){var t=exp(),fn="elsharkawy-backup-"+today()+".json";
+ try{var fl=new File([t],fn,{type:"application/json"});if(navigator.canShare&&navigator.canShare({files:[fl]})){navigator.share({files:[fl],title:fn}).catch(function(){});return}}catch(x){}
+ var b=new Blob([t],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=fn;document.body.appendChild(a);a.click();a.remove()};
+$("bkc").onclick=function(){var t=exp();if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){alert("✅ اتنسخت")},function(){$("bkt").value=t;alert("انسخ النص من الخانة")})}else{$("bkt").value=t;alert("انسخ النص من الخانة")}};
+function mrg(o){var a={};S.visits.forEach(function(v){a[v.id]=1});(o.visits||[]).forEach(function(v){if(!a[v.id])S.visits.push(v)});
+ var b={};S.pays.forEach(function(p){b[p.id]=1});(o.pays||[]).forEach(function(p){if(!b[p.id])S.pays.push(p)});
+ Object.keys(o.prof||{}).forEach(function(n){var x=S.prof[n],y=o.prof[n];if(!x||(y.u||0)>(x.u||0))S.prof[n]=Object.assign({},x||{},y)});
+ var c={};S.cats.forEach(function(k){c[k.id]=k});(o.cats||[]).forEach(function(k){var x=c[k.id];if(!x)S.cats.push(k);else{var ii={};x.items.forEach(function(i){ii[i.id]=1});k.items.forEach(function(i){if(!ii[i.id])x.items.push(i)})}})}
+function imp(mode){var go=function(t){var o;try{o=JSON.parse(t);if(!o.cats)throw 0}catch(x){alert("الملف غير صالح");return}
+  nt(mode?"🔀 دمج بيانات مستوردة":"♻️ استيراد (استبدال البيانات)");
+  if(!mode){var n=S.nt,sn=S.seen;S=o;S.nt=n;S.seen=sn}else mrg(o);
+  migrate();save();cp();$("bkt").value="";$("bkf").value="";refresh();alert("✅ تم")};
+ var f=$("bkf").files[0];if(f){var r=new FileReader();r.onload=function(){go(r.result)};r.readAsText(f)}else if($("bkt").value.trim())go($("bkt").value);else alert("اختار ملف أو الصق البيانات")}
+$("bkr").onclick=function(){if(confirm("هيتم استبدال كل البيانات الحالية. تكمل؟"))imp(0)};
+$("bkm").onclick=function(){imp(1)};
+$("rm").value=today().slice(0,7);
+function rrep(){var m=$("rm").value||today().slice(0,7),V=S.visits.filter(function(v){return mk(v.d)===m}),P=S.pays.filter(function(p){return mk(p.d)===m}),nm={},sv2={},c=0,t=0;
+ V.forEach(function(v){nm[pn(v)]=1;t+=v.net;c+=v.pd;v.items.forEach(function(i){var z=sv2[i.n]=sv2[i.n]||{q:0,a:0};z.q+=i.q;z.a+=i.p*i.q})});P.forEach(function(p){c+=p.a;nm[p.pt]=1});
+ var np=Object.keys(S.prof).filter(function(n){return mk(S.prof[n].d||"")===m}).length,top=Object.keys(sv2).sort(function(a,b){return sv2[b].a-sv2[a].a}).slice(0,5),
+ L=[["عدد الزيارات",V.length],["عدد المرضى",Object.keys(nm).length],["مرضى جدد",np],["إجمالي الحسابات",fmt(t)+" ج.م"],["المحصّل (حسابات + دفعات)",fmt(c)+" ج.م"]];
+ RT="تقرير "+mlab(m)+" — Elsharkawy Dental Clinic\n"+DR+"\n"+L.map(function(x){return x[0]+": "+x[1]}).join("\n")+(top.length?"\n\nأكتر الخدمات:\n"+top.map(function(k){return k+" × "+sv2[k].q+" = "+fmt(sv2[k].a)}).join("\n"):"");
+ $("rb").innerHTML=L.map(function(x){return '<div class="sr"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>'}).join("")+(top.length?'<div class="cg">أكتر الخدمات دخلاً</div>'+top.map(function(k){return '<div class="sr"><span>'+e(k)+' ×'+sv2[k].q+'</span><b>'+fmt(sv2[k].a)+'</b></div>'}).join(""):'')}
+$("rm").addEventListener("input",rrep);$("rpd").addEventListener("toggle",rrep);$("rsh").onclick=function(){rrep();shr(RT)};
+var LS=0;
+// Cloud sync configuration. The service-role key is NEVER stored in this app.
+var CLOUD_URL="https://iqvuosxqdhnqnadvpcwe.supabase.co/functions/v1/clinic-sync";
+var CLOUD_PIN="1997",CLOUD_SYNC_ENABLED=false,cloudBase=null,cloudBusy=false,cloudTimer=0,cloudUnlocked=false,cloudLast="";
+try{cloudBase=JSON.parse(localStorage.getItem(K+"_cloud_base")||"null")}catch(_e){cloudBase=null}
+function sharedState(x){var o={};Object.keys(x||{}).forEach(function(k){if(["cart","drafts","nt","seen","kashf","undo"].indexOf(k)<0)o[k]=x[k]});return o}
+function cloudStatus(msg){cloudLast=msg||"";var el=$("ss");if(el)el.textContent=(navigator.onLine?"● متصل":"● أوفلاين")+" — "+(cloudLast|| (LS?"آخر حفظ محلي "+tm({t:LS}):"جاهز"))}
+function scheduleCloudSync(){if(!CLOUD_SYNC_ENABLED||!cloudUnlocked||!navigator.onLine)return;clearTimeout(cloudTimer);cloudTimer=setTimeout(syncCloud,1800)}
+async function syncCloud(){if(!CLOUD_SYNC_ENABLED||!cloudUnlocked||!navigator.onLine||cloudBusy)return;cloudBusy=true;cloudStatus("جارٍ مزامنة بيانات العيادة…");try{
+ var local=sharedState(S),base=cloudBase||{};
+ var response=await fetch(CLOUD_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"sync",pin:CLOUD_PIN,data:{state:local,base:base}})});
+ var result=await response.json();if(!response.ok||!result.ok)throw new Error(result.error||"فشلت المزامنة");
+ var device={cart:S.cart,drafts:S.drafts,nt:S.nt,seen:S.seen,kashf:S.kashf};
+ S=Object.assign({},result.state,device);cloudBase=sharedState(result.state);localStorage.setItem(K+"_cloud_base",JSON.stringify(cloudBase));localStorage.setItem(K,JSON.stringify(S));LS=Date.now();
+ if(typeof refresh==="function")refresh();cloudStatus("✓ تمت مزامنة بيانات العيادة "+tm({t:Date.now()}));
+ }catch(err){cloudStatus("⚠ المزامنة لم تكتمل — "+String(err.message||err));}finally{cloudBusy=false}}
+function ss(){var el=$("ss");if(el)el.textContent=(navigator.onLine?"● متصل":"● أوفلاين")+" — "+(cloudLast|| (LS?"آخر حفظ محلي "+tm({t:LS}):"جاهز"))}
+window.addEventListener("online",function(){ss();scheduleCloudSync()});window.addEventListener("offline",ss);ss();
+function goAcc(n){var cc=S.cart;S.drafts=S.drafts||{};
+ if(cc.pt&&cc.pt!==n){if(cc.items.length)S.drafts[cc.pt]=cc;S.cart=S.drafts[n]||nc();delete S.drafts[n]}
+ S.cart.pt=n;save();tab(2);$("svd").open=true;$("svd").scrollIntoView({behavior:"smooth"})}
+function nz(x){return String(x).replace(/[\u064B-\u0652\u0640]/g,"").replace(/[أإآ]/g,"ا").replace(/ى/g,"ي").replace(/ة/g,"ه").replace(/\s+/g," ").trim().toLowerCase()}
+function lev(a,b){var p=[],i,j;for(j=0;j<=b.length;j++)p[j]=j;for(i=1;i<=a.length;i++){var c=[i];for(j=1;j<=b.length;j++)c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));p=c}return p[b.length]}
+function sim(a,b){var x=nz(a),y=nz(b);if(!x||!y)return false;if(x===y)return true;var w=x.split(" ");return w.length>=3&&y.split(" ").length===w.length&&Math.abs(x.length-y.length)<=1&&lev(x,y)<=1}
+function allN(){var m={};S.visits.forEach(function(v){m[pn(v)]=1});S.pays.forEach(function(p){m[p.pt]=1});Object.keys(S.prof).forEach(function(n){m[n]=1});return Object.keys(m)}
+function canon(n){if(!n)return n;var a=allN();if(a.indexOf(n)>-1)return n;for(var i=0;i<a.length;i++)if(sim(a[i],n))return a[i];return n}
+function mergeP(f,t){S.visits.forEach(function(v){if(pn(v)===f)v.pt=t});S.pays.forEach(function(p){if(p.pt===f)p.pt=t});if(S.cart.pt===f)S.cart.pt=t;if(cur===f)cur=t;
+ var pa=S.prof[f],pb=S.prof[t];if(pa){if(pb){var m=Object.assign({},pb);Object.keys(pa).forEach(function(k){if(m[k]==null||m[k]==="")m[k]=pa[k]});["c","a"].forEach(function(k){m[k]=(pb[k]||[]).concat((pa[k]||[]).filter(function(x){return (pb[k]||[]).indexOf(x)<0}))});m.teeth=Object.assign({},pa.teeth,pb.teeth);m.name=t;S.prof[t]=m}else{pa.name=t;S.prof[t]=pa}delete S.prof[f]}}
+function autoM(){var a=allN().filter(function(n){return n!=="بدون اسم"}),dn={},c=0;
+ for(var i=0;i<a.length;i++){if(dn[a[i]])continue;for(var j=i+1;j<a.length;j++){if(dn[a[j]]||!sim(a[i],a[j]))continue;var f=a[j],t=a[i];if(!S.prof[t]&&S.prof[f]){f=a[i];t=a[j]}mergeP(f,t);dn[f]=1;c++;if(f===a[i])break}}
+ if(c)nt("🔀 دمج تلقائي لـ "+c+" اسم مكرر");return c}
+var tt=document.createElement("div"),tto=0,cfm=document.createElement("div"),_ok=null,_last=null;
+tt.style.cssText="position:fixed;left:12px;right:12px;bottom:calc(76px + env(safe-area-inset-bottom,0px));background:#222;color:#fff;border-radius:12px;padding:12px 14px;z-index:120;display:none;text-align:center;white-space:pre-line;box-shadow:0 4px 14px #0006";document.body.appendChild(tt);
+function toast(m){tt.textContent=m;tt.style.display="block";clearTimeout(tto);tto=setTimeout(function(){tt.style.display="none"},4500)}
+window.alert=function(m){toast(String(m))};
+cfm.id="cfm";cfm.style.cssText="position:fixed;inset:0;background:#0008;z-index:130;display:none;place-items:center;padding:20px";
+cfm.innerHTML='<div style="background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:14px;padding:18px;max-width:340px;width:100%;text-align:center"><div id="cfmt" style="font-size:16px;margin-bottom:16px;white-space:pre-line"></div><div style="display:flex;gap:8px"><button id="cfy" style="flex:1;border:0;border-radius:10px;padding:12px;color:#fff;font-weight:700"></button><button id="cfn" style="flex:1;border:1px solid var(--bd);border-radius:10px;padding:12px;background:var(--bg);color:var(--tx)">إلغاء</button></div></div>';
+document.body.appendChild(cfm);
+document.addEventListener("click",function(ev){if(!ev.target.closest("#cfm"))_last=ev.target},true);
+window.confirm=function(m,k){var key=m+"|"+(k||"");if(_ok===key){_ok=null;return true}
+ var y=$("cfy"),dg=/حذف|مسح|استبدال/.test(m);$("cfmt").textContent=m;y.textContent=dg?"🗑 نعم، تأكيد":"✅ تأكيد";y.style.background=dg?"var(--rd)":"var(--tl)";cfm.style.display="grid";
+ y.onclick=function(){cfm.style.display="none";_ok=key;var t=_last;if(t&&t.click)t.click();_ok=null};
+ $("cfn").onclick=function(){cfm.style.display="none"};return false};
+function wph(n){var p=((S.prof[n]||{}).phone||"").replace(/\D/g,"");return p[0]==="0"?"2"+p:p}
+function runb(d){var E=d.V.map(function(v){return{k:"v",x:v,t:vt(v)}}).concat(d.P.map(function(p){return{k:"p",x:p,t:vt(p)}})).sort(function(a,b){return a.t-b.t}),t=0,pd=0,m={};
+ E.forEach(function(z){if(z.k==="v"){t+=z.x.net;pd+=z.x.pd}else{pd+=z.x.a;m[z.x.id]={t:t,r:Math.max(t-pd,0)}}});return m}
+function rdb(){var D=[],tot=0;allN().forEach(function(n){var q=pdata(n);if(q.bal>0){var l=0;q.V.forEach(function(v){l=Math.max(l,vt(v))});q.P.forEach(function(p){l=Math.max(l,vt(p))});D.push({n:n,b:q.bal,l:l});tot+=q.bal}});
+ D.sort(function(a,b){return b.b-a.b});$("dbs").textContent="💳 المديونيات ("+D.length+" مريض — "+fmt(tot)+" ج.م)";
+ $("dbl").innerHTML=D.length?D.map(function(z){return '<div class="le"><div>👤 '+e(z.n)+'<small>آخر تعامل: '+dd(ld(z.l))+'</small></div><b class="rd">'+fmt(z.b)+'</b></div><div class="va"><button data-op="pay" data-n="'+e(z.n)+'">💰 دفعة</button><button data-op="file" data-n="'+e(z.n)+'">📂 الملف</button>'+(wph(z.n)?'<button data-op="rem" data-n="'+e(z.n)+'" data-b="'+z.b+'">📲 تذكير</button>':'')+'</div>'}).join(""):'<div class="mu">مفيش مديونيات 🎉</div>'}
+function rml(){var E=[];S.visits.forEach(function(v){E.push({n:pn(v),d:v.d,t:vt(v),a:v.net,c:v.pd})});S.pays.forEach(function(p){E.push({n:p.pt,d:p.d,t:vt(p),a:0,c:p.a})});Object.keys(S.prof).forEach(function(n){var p=S.prof[n];E.push({n:n,d:p.d,t:p.t||0,a:0,c:0})});
+ var g={};E.forEach(function(x){var k=mk(x.d),m=g[k]=g[k]||{n:{},a:0,c:0},r=m.n[x.n]=m.n[x.n]||{t:0,d:"",a:0};m.a+=x.a;m.c+=x.c;r.a+=x.a;if(x.t>=r.t){r.t=x.t;r.d=x.d}});
+ var h="";Object.keys(g).sort().reverse().forEach(function(k){var m=g[k],ns=Object.keys(m.n).filter(function(n){return !mq||(n+" "+((S.prof[n]||{}).phone||"")).toLowerCase().indexOf(mq)>-1});if(!ns.length)return;
+  ns.sort(function(a,b){return m.n[b].t-m.n[a].t});var o=mq||mo["m"+k];
+  h+='<section><div class="ch" data-m="m'+k+'"><span>'+(o?'▾':'◂')+'</span><b class="cn">'+mlab(k)+'</b><span class="cnt">'+ns.length+' مريض</span></div>';
+  if(o)h+='<div class="le sm"><div>إجمالي الشهر: '+fmt(m.a)+' · المحصّل: '+fmt(m.c)+' ج.م</div></div>'+ns.map(function(n){var r=m.n[n],q=e("p"+k+"|"+n),x=mo[q];
+   return '<div class="le pr" data-m="'+q+'"><div>'+(x?'▾':'◂')+' 👤 '+e(n)+(atx(S.prof[n])?' ⚠️':'')+'<small>آخر تحديث: '+dd(r.d)+' '+tm(r)+'</small></div><b>'+bt2(n)+'</b></div>'+(x?'<div class="va"><button data-op="pay" data-n="'+e(n)+'">💰 إضافة دفعة</button><button data-op="accn" data-n="'+e(n)+'">🧾 حساب</button><button data-op="file" data-n="'+e(n)+'">📂 الملف</button><button class="dl" data-op="del" data-n="'+e(n)+'">🗑 حذف</button></div>':'')}).join("");
+  h+='</section>'});
+ $("ml").innerHTML=dash()+(h||'<div class="mu">مفيش مرضى متسجلين لسه</div>');rdb()}
+function rmf(){var n=cur,d=pdata(n),RB=runb(d),h='<button class="bk" data-op="back">→ رجوع للمرضى</button><button class="big" data-op="acc" style="margin:0 0 10px">🧾 إضافة خدمات لحساب المريض</button><div class="tot"><span>👤 '+e(n)+'</span><span>'+(!d.V.length&&!d.P.length?'مريض جديد — لا حسابات':d.bal>0?'مديونية '+fmt(d.bal):'مدفوع بالكامل')+'</span></div><div class="mu2" style="margin:-4px 0 8px">الطبيب المعالج: '+DR+'</div><div class="stats"><div><small>إجمالي الحسابات</small><b>'+fmt(d.t)+'</b></div><div><small>المدفوع</small><b>'+fmt(d.paid)+'</b></div><div class="rdc"><small>المديونية</small><b>'+fmt(Math.max(d.bal,0))+'</b></div></div>';
+ h+=ac2(n)+'<details class="box dt"'+(payopen?' open':'')+'><summary>💰 إضافة دفعة</summary><div class="form"><div><label>المبلغ (ج.م) — بتتسجل بتاريخ ووقت دلوقتي</label><input type="number" id="pya" inputmode="decimal"></div><input id="pyn" placeholder="ملاحظة (اختياري)"><button class="big" data-op="addpay">حفظ الدفعة</button></div></details>';
+ h+='<details class="box dt"><summary>🦷 رسم الأسنان</summary><div class="form"><div id="od"></div></div></details>';
+ h+='<details class="box dt"><summary>✏️ تعديل الاسم / دمج مريض مكرر</summary><div class="form"><input id="rnn" placeholder="الاسم الجديد (لو موجود هيتدمج)"><button class="big" data-op="rname">تنفيذ</button></div></details>';
+ h+='<details class="box dt"><summary>📋 البيانات الصحية والشخصية</summary><div id="pfe">'+pform(S.prof[n]||{name:n},1)+'</div></details>';
+ var E=d.V.map(function(v){return{k:"v",x:v,t:vt(v)}}).concat(d.P.map(function(p){return{k:"p",x:p,t:vt(p)}})),g={};
+ E.forEach(function(z){(g[mk(z.x.d)]=g[mk(z.x.d)]||[]).push(z)});
+ h+=Object.keys(g).sort().reverse().map(function(k){var a=g[k].sort(function(p,q){return q.t-p.t}),c=0,o=mo["f"+k],q="f"+k;a.forEach(function(z){c+=z.k==="v"?z.x.net:0});
+  return '<section><div class="ch" data-m="'+q+'"><span>'+(o?'▾':'◂')+'</span><b class="cn">سجل '+mlab(k)+'</b><span class="cnt">'+a.length+'</span></div>'+(o?'<div class="le sm"><div>حسابات الشهر: '+fmt(c)+' ج.م</div></div>'+a.map(function(z){var v=z.x;
+   return z.k==="v"?'<div class="le"><div>🧾 '+dd(v.d)+' '+tm(v)+'<small>'+e(v.items.map(function(i){return i.n+(i.q>1?" ×"+i.q:"")}).join("، "))+(v.note?' — '+e(v.note):'')+'</small></div><b>'+fmt(v.net)+'<small>مدفوع '+fmt(v.pd)+'</small></b><button class="x" style="color:var(--tl)" data-op="rcp" data-id="'+v.id+'">📤</button></div>':'<div class="le"><div>💰 دفعة · '+dd(v.d)+' '+tm(v)+(v.note?'<small>'+e(v.note)+'</small>':'')+'<small>إجمالي حسابه: '+fmt((RB[v.id]||{}).t)+' — المديونية بعد الدفعة: '+fmt((RB[v.id]||{}).r)+'</small></div><b>+'+fmt(v.a)+'</b><button class="x" data-op="delpay" data-id="'+v.id+'">✕</button></div>'}).join(""):'')+'</section>'}).join("");
+ $("mf").innerHTML=h;rod()}
+function sv(){$("mlist").classList.toggle("hide",!!cur);$("mf").classList.toggle("hide",!cur);if(cur)rmf();else rml()}
+$("mq").addEventListener("input",function(){mq=this.value.trim().toLowerCase();rml()});
+$("mv").addEventListener("click",function(ev){var b=ev.target.closest("[data-op]"),h=ev.target.closest("[data-m]"),th=ev.target.closest("[data-th]"),tl=ev.target.closest("[data-tl]");
+ if(th){var p=S.prof[cur]=S.prof[cur]||{name:cur,d:today(),t:Date.now(),c:[],a:[]};p.teeth=p.teeth||{};if(tool==="سليم")delete p.teeth[th.dataset.th];else p.teeth[th.dataset.th]=tool;save();rod();return}
+ if(tl){tool=tl.dataset.tl;rod();return}
+ if(b){var o=b.dataset.op,n=b.dataset.n;
+  if(o==="file"||o==="pay"){cur=n;payopen=o==="pay";sv();window.scrollTo(0,0)}
+  else if(o==="back"){cur=null;sv()}
+  else if(o==="del"){if(confirm("حذف المريض "+n+" بكل حساباته ودفعاته؟")){S.visits=S.visits.filter(function(v){return pn(v)!==n});S.pays=S.pays.filter(function(p){return p.pt!==n});delete S.prof[n];if(S.cart.pt===n)S.cart=nc();if(S.drafts)delete S.drafts[n];nt("🗑 حذف المريض: "+n);sv()}}
+  else if(o==="addpay"){var a=parseFloat($("pya").value);if(!a){alert("اكتب مبلغ الدفعة");return}
+   S.pays.push({id:id(),pt:cur,d:today(),t:Date.now(),a:a,note:$("pyn").value.trim()});mo["f"+mk(today())]=true;payopen=false;nt("💰 دفعة جديدة "+fmt(a)+" ج.م من "+cur+" — المديونية "+fmt(Math.max(pdata(cur).bal,0))+" ج.م");sv()}
+  else if(o==="newpt"){var q=pget($("npf"));if(!q.name){alert("اكتب اسم المريض");return}var cn=canon(q.name);q.name=cn;if(S.prof[cn]){alert("المريض ده متسجل بالفعل: "+cn+" — هيتفتح حسابه");np0();$("npd").open=false;cur=cn;sv();goAcc(cn);return}
+   q.d=today();q.t=Date.now();q.u=q.t;S.prof[q.name]=q;nt("🆕 مريض جديد: "+q.name);np0();$("npd").open=false;cur=q.name;payopen=false;sv();goAcc(q.name)}
+  else if(o==="editpt"){var q=pget($("pfe")),old=S.prof[cur]||{d:today(),t:Date.now()};q.name=cur;nt(q.ap&&q.ap!==old.ap?"📅 موعد "+cur+": "+dd(q.ap.slice(0,10))+" "+q.ap.slice(11):"✏️ تعديل بيانات "+cur);S.prof[cur]=Object.assign(old,q,{u:Date.now()});save();sv();alert("✅ تم حفظ البيانات")}
+  else if(o==="rem"){window.open("https://wa.me/"+wph(n)+"?text="+encodeURIComponent("مرحباً "+n+"، تذكير بالمبلغ المتبقي "+fmt(b.dataset.b)+" ج.م لدى Elsharkawy Dental Clinic. شكراً لك"))}
+  else if(o==="acc"){goAcc(cur)}
+  else if(o==="accn"){goAcc(n)}
+  else if(o==="rname"){var nn=$("rnn").value.trim();if(!nn||nn===cur)return;var pd0=pdata(nn),ex=S.prof[nn]||pd0.V.length||pd0.P.length;
+   if(!confirm(ex?"الاسم "+nn+" موجود، هيتم دمج الملفين. تكمل؟":"تغيير الاسم إلى "+nn+"؟"))return;
+   nt("✏️ "+(ex?"دمج ":"تغيير اسم ")+cur+" ← "+nn);
+   S.visits.forEach(function(v){if(pn(v)===cur)v.pt=nn});S.pays.forEach(function(p){if(p.pt===cur)p.pt=nn});
+   var pa=S.prof[cur],pb=S.prof[nn];if(pa){if(pb){var mm=Object.assign({},pb);Object.keys(pa).forEach(function(k){if(mm[k]==null||mm[k]==="")mm[k]=pa[k]});["c","a"].forEach(function(k){mm[k]=(pb[k]||[]).concat((pa[k]||[]).filter(function(x){return (pb[k]||[]).indexOf(x)<0}))});mm.teeth=Object.assign({},pa.teeth,pb.teeth);mm.name=nn;S.prof[nn]=mm}else{pa.name=nn;S.prof[nn]=pa}delete S.prof[cur]}
+   cur=nn;save();sv()}
+  else if(o==="rcp"){var v=S.visits.filter(function(z){return z.id===b.dataset.id})[0],t="Elsharkawy Dental Clinic\n"+DR+"\nالمريض: "+pn(v)+"\nالتاريخ: "+dd(v.d)+"\n\n"+v.items.map(function(i){return i.n+" × "+i.q+" = "+fmt(i.p*i.q)}).join("\n")+"\n\n"+(v.disc?"خصم: "+fmt(v.disc)+"\n":"")+"الإجمالي: "+fmt(v.net)+" ج.م\nالمدفوع: "+fmt(v.pd)+(v.r?"\nالمتبقي: "+fmt(v.r)+" ج.م":"");
+   if(navigator.share){navigator.share({text:t}).catch(function(){})}else{window.open("https://wa.me/?text="+encodeURIComponent(t))}}
+  else if(o==="delpay"){if(confirm("حذف الدفعة؟",b.dataset.id)){S.pays=S.pays.filter(function(p){return p.id!==b.dataset.id});nt("🗑 حذف دفعة من "+cur);sv()}}}
+ else if(h){mo[h.dataset.m]=!mo[h.dataset.m];sv()}});
+function tab(n){["pv","lv","mv"].forEach(function(x,i){$(x).classList.toggle("hide",n!==i+1)});[1,2,3].forEach(function(i){$("t"+i).classList.toggle("on",n===i)});if(n===2)rv();if(n===3)sv();window.scrollTo(0,0)}
+$("t1").onclick=function(){tab(1)};$("t2").onclick=function(){tab(2)};$("t3").onclick=function(){cur=null;tab(3)};
+np0();
+$("lc").addEventListener("input",function(){if(this.value.length>=4){if(btoa(this.value)==="MTk5Nw=="){$("lk").classList.add("hide");cloudUnlocked=true;if(CLOUD_SYNC_ENABLED)syncCloud()}else{this.value="";$("le2").textContent="الرمز غلط"}}});
+load();migrate();rp();ipv();tab(3);nb();cp();if(autoM())refresh();$("lc").focus();
+</script>
+</body>
+</html>
