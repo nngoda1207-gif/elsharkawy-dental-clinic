@@ -1,0 +1,6 @@
+{
+  "appId": "com.elsharkawy.dental",
+  "appName": "Elsharkawy Dental Clinic",
+  "webDir": "www",
+  "server": { "androidScheme": "https" }
+}
