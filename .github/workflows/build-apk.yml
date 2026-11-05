@@ -37,11 +37,13 @@ jobs:
           else
             echo "available=false" >> "$GITHUB_OUTPUT"
           fi
-      - name: Decode original release keystore
+      - name: Decode release keystore
         if: steps.signing.outputs.available == 'true'
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
-        run: echo "$KEYSTORE_BASE64" | base64 --decode > android/app/release-keystore.jks
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 --decode > android/release-keystore.jks
+          test -s android/release-keystore.jks
       - name: Build signed release APK
         if: steps.signing.outputs.available == 'true'
         env:
@@ -55,12 +57,12 @@ jobs:
             -Pandroid.injected.signing.store.password="$KEYSTORE_PASSWORD" \
             -Pandroid.injected.signing.key.alias="$KEY_ALIAS" \
             -Pandroid.injected.signing.key.password="$KEY_PASSWORD"
-      - name: Verify release package and new signing certificate
+      - name: Verify release package and signing certificate
         if: steps.signing.outputs.available == 'true'
         run: |
           APK="android/app/build/outputs/apk/release/app-release.apk"
           TOOLS="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n1)"
-          "$TOOLS/aapt" dump badging "$APK" | grep -q "package: name='com.elsharkawy.clinic'"
+          "$TOOLS/aapt" dump badging "$APK" | grep -q "package: name='com.elsharkawy.dental'"
           ACTUAL="$( "$TOOLS/apksigner" verify --print-certs "$APK" | awk -F': ' '/Signer #1 certificate SHA-256 digest:/ {gsub(/:/,"",$2); print tolower($2); exit}' )"
           EXPECTED="20bccf164ff7ff85dbb5633279d20a51a7808b0d159f998b8181cb4f18700648"
           test "$ACTUAL" = "$EXPECTED"
