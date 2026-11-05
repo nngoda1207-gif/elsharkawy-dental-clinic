@@ -219,11 +219,11 @@ $("lv").addEventListener("click",function(ev){var t=ev.target,b,x;
  else if(t.closest("[data-clr]")){if(confirm("مسح الحساب الحالي؟")){var p=S.cart.pt;S.cart=nc();S.cart.pt=p;save();rc();rs()}}
  else if(t.closest("[data-save]")){var s=sums(),pt=canon($("pt").value.trim());if(!S.cart.items.length)return;if(!pt){alert("لازم تسجل اسم المريض قبل حفظ الحساب، علشان الحساب مايضيعش من غير ملف مريض.");$("pt").focus();return}
   var pd0=S.prof[pt];if(!pd0){var now=Date.now();S.prof[pt]={name:pt,d:$("dt").value||today(),t:now,u:now,c:[],a:[]}};
-  S.visits.push({id:id(),d:$("dt").value||today(),t:S.cart.t0||Date.now(),pt:pt,items:S.cart.items.map(function(y){return{n:y.n,p:y.p,q:y.q}}),disc:s.d,sub:s.s,net:s.n,pd:s.pd,r:s.r,note:S.cart.vn||""});
-  nt("🧾 حساب جديد: "+(pt||"بدون اسم")+" — "+fmt(s.n)+" ج.م");S.cart=nc();save();rv();$("hist").scrollIntoView({behavior:"smooth"})}
+  var editId=S.cart.editId||"",visit={id:editId||id(),d:$("dt").value||today(),t:S.cart.t0||Date.now(),pt:pt,items:S.cart.items.map(function(y){return{n:y.n,p:y.p,q:y.q}}),disc:s.d,sub:s.s,net:s.n,pd:s.pd,r:s.r,note:S.cart.vn||""};
+  if(editId){var ei=S.visits.findIndex(function(v){return v.id===editId});if(ei>=0)S.visits[ei]=visit;else S.visits.push(visit);nt("✏️ تعديل حساب "+pt+" — "+fmt(s.n)+" ج.م")}else{S.visits.push(visit);nt("🧾 حساب جديد: "+pt+" — "+fmt(s.n)+" ج.م")}S.cart=nc();save();rv();$("hist").scrollIntoView({behavior:"smooth"})}
  else if(b=t.closest("[data-vd]")){if(!confirm("حذف الحساب ده؟",b.dataset.vd))return;var v0=S.visits.filter(function(v){return v.id===b.dataset.vd})[0];nt("🗑 حذف حساب "+(v0?pn(v0)+" — "+fmt(v0.net)+" ج.م":""));S.visits=S.visits.filter(function(v){return v.id!==b.dataset.vd});save();pl();rh()}
- else if(b=t.closest("[data-ve]")){if(S.cart.items.length&&!confirm("الحساب الحالي هيتمسح، متأكد؟"))return;var v=S.visits.filter(function(y){return y.id===b.dataset.ve})[0];
-  S.visits=S.visits.filter(function(y){return y!==v});S.cart={items:v.items.map(function(y){return{id:id(),sid:"",n:y.n,p:y.p,q:y.q}}),disc:v.disc||"",paid:v.r?v.pd:"",pt:v.pt,t0:v.t,vn:v.note||""};$("dt").value=v.d;save();rv();$("cartd").open=true;$("cart").scrollIntoView({behavior:"smooth"})}
+ else if(b=t.closest("[data-ve]")){var v=S.visits.filter(function(y){return y.id===b.dataset.ve})[0];if(!v)return;if(S.cart.items.length&&!confirm("الحساب الحالي هيتمسح، متأكد؟"))return;
+  S.cart={editId:v.id,items:v.items.map(function(y){return{id:id(),sid:"",n:y.n,p:y.p,q:y.q}}),disc:v.disc||"",paid:v.r?v.pd:"",pt:v.pt,t0:v.t,vn:v.note||""};$("dt").value=v.d;save();rv();$("cartd").open=true;$("cart").scrollIntoView({behavior:"smooth"})}
  else if(t.closest("[data-cpt]")){S.cart.pt="";$("pt").value="";save();pwarn()}
  else if(t.closest("#fb")){$("cartd").open=true;$("cart").scrollIntoView({behavior:"smooth"})}});
 var mq="",mo={},cur=null,payopen=false,MN=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
@@ -385,7 +385,7 @@ $("mv").addEventListener("click",function(ev){var b=ev.target.closest("[data-op]
   else if(o==="rem"){window.open("https://wa.me/"+wph(n)+"?text="+encodeURIComponent("مرحباً "+n+"، تذكير بالمبلغ المتبقي "+fmt(b.dataset.b)+" ج.م لدى Elsharkawy Dental Clinic. شكراً لك"))}
   else if(o==="acc"){goAcc(cur)}
   else if(o==="accn"){goAcc(n)}
-  else if(o==="editvisit"){var ev0=S.visits.filter(function(v){return v.id===b.dataset.id})[0];if(!ev0)return;if(S.cart.items.length&&!confirm("الحساب الحالي هيتمسح، متأكد؟"))return;S.visits=S.visits.filter(function(v){return v!==ev0});S.cart={items:ev0.items.map(function(y){return{id:id(),sid:"",n:y.n,p:y.p,q:y.q}}),disc:ev0.disc||"",paid:ev0.r?ev0.pd:"",pt:ev0.pt,t0:ev0.t,vn:ev0.note||""};$("dt").value=ev0.d;save();cur=null;tab(2);$("cartd").open=true;$("cart").scrollIntoView({behavior:"smooth"})}
+  else if(o==="editvisit"){var ev0=S.visits.filter(function(v){return v.id===b.dataset.id})[0];if(!ev0)return;if(S.cart.items.length&&!confirm("الحساب الحالي هيتمسح، متأكد؟"))return;S.cart={editId:ev0.id,items:ev0.items.map(function(y){return{id:id(),sid:"",n:y.n,p:y.p,q:y.q}}),disc:ev0.disc||"",paid:ev0.r?ev0.pd:"",pt:ev0.pt,t0:ev0.t,vn:ev0.note||""};$("dt").value=ev0.d;save();cur=null;tab(2);$("cartd").open=true;$("cart").scrollIntoView({behavior:"smooth"})}
   else if(o==="rname"){var nn=$("rnn").value.trim();if(!nn||nn===cur)return;var pd0=pdata(nn),ex=S.prof[nn]||pd0.V.length||pd0.P.length;
    if(!confirm(ex?"الاسم "+nn+" موجود، هيتم دمج الملفين. تكمل؟":"تغيير الاسم إلى "+nn+"؟"))return;
    nt("✏️ "+(ex?"دمج ":"تغيير اسم ")+cur+" ← "+nn);
