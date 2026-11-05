@@ -10,14 +10,12 @@ const cors = {
   "Content-Type": "application/json",
 };
 const attempts = new Map<string, { n: number; start: number }>();
-
 async function sha(s: string) {
   const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
   return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join("");
 }
 const obj = (v: any) => v && typeof v === "object" && !Array.isArray(v) ? v : {};
 const same = (a: any, b: any) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
-
 function mergeValue(base: any, local: any, remote: any): any {
   if (same(local, remote)) return local;
   if (same(local, base)) return remote;
@@ -38,10 +36,11 @@ function mergeValue(base: any, local: any, remote: any): any {
   const lt = Number(local?.u || local?.t || 0), rt = Number(remote?.u || remote?.t || 0);
   return lt > rt ? local : remote;
 }
-function mergeCollection(base: any[], local: any[], remote: any[], key: string) {
-  const B = new Map((base || []).map(x => [String(x?.[key]), x]));
-  const L = new Map((local || []).map(x => [String(x?.[key]), x]));
-  const R = new Map((remote || []).map(x => [String(x?.[key]), x]));
+function mergeCollection(base: any[], local: any[], remote: any[], key: string, fallback?: (x: any) => string) {
+  const getKey = (x: any) => String(fallback ? fallback(x) : x?.[key] ?? "undefined");
+  const B = new Map((base || []).map(x => [getKey(x), x]));
+  const L = new Map((local || []).map(x => [getKey(x), x]));
+  const R = new Map((remote || []).map(x => [getKey(x), x]));
   const ids = new Set([...B.keys(), ...L.keys(), ...R.keys()]);
   const out: any[] = [];
   for (const id of ids) {
@@ -53,19 +52,22 @@ function mergeCollection(base: any[], local: any[], remote: any[], key: string) 
 function mergeState(base: any, local: any, remote: any) {
   const b = obj(base), l = obj(local), r = obj(remote), out: any = { ...r };
   for (const k of ["visits", "pays"]) out[k] = mergeCollection(b[k] || [], l[k] || [], r[k] || [], "id");
-  const cats = mergeCollection(b.cats || [], l.cats || [], r.cats || [], "id");
+  const catKey = (x: any) => String(x?.name || "").trim().toLocaleLowerCase();
+  const itemKey = (x: any) => [String(x?.n || "").trim().toLocaleLowerCase(), String(x?.u || "").trim().toLocaleLowerCase()].join("|");
+  const cats = mergeCollection(b.cats || [], l.cats || [], r.cats || [], "id", catKey);
   out.cats = cats.map((c: any) => {
-    const bc = (b.cats || []).find((x: any) => x.id === c.id) || {};
-    const lc = (l.cats || []).find((x: any) => x.id === c.id) || {};
-    const rc = (r.cats || []).find((x: any) => x.id === c.id) || {};
-    return { ...c, items: mergeCollection(bc.items || [], lc.items || [], rc.items || [], "id") };
+    const matchCat = (arr: any[]) => arr.find((x: any) => x.id === c.id) || arr.find((x: any) => catKey(x) === catKey(c)) || {};
+    const bc = matchCat(b.cats || []), lc = matchCat(l.cats || []), rc = matchCat(r.cats || []);
+    return { ...c, items: mergeCollection(bc.items || [], lc.items || [], rc.items || [], "id", itemKey) };
   });
   out.prof = mergeValue(b.prof || {}, l.prof || {}, r.prof || {});
-  const deviceOnly = new Set(["visits", "pays", "cats", "prof", "cart", "drafts", "nt", "seen", "kashf"]);
+  const deviceOnly = new Set(["cart", "drafts", "nt", "seen", "kashf", "undo"]);
   for (const k of new Set([...Object.keys(b), ...Object.keys(l), ...Object.keys(r)])) {
-    if (!deviceOnly.has(k)) {
+    if (deviceOnly.has(k)) delete out[k];
+    else {
       const v = mergeValue(b[k], l[k], r[k]);
-      if (v !== undefined) out[k] = v; else delete out[k];
+      if (v !== undefined) out[k] = v;
+      else delete out[k];
     }
   }
   return out;
@@ -102,7 +104,7 @@ Deno.serve(async (req: Request) => {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
   const now = Date.now(), a = attempts.get(ip) || { n: 0, start: now };
   if (now - a.start > 15 * 60 * 1000) { a.n = 0; a.start = now; }
-  if (a.n >= 10) return new Response(JSON.stringify({ error: "محاولات كثيرة، جربي بعد 15 دقيقة" }), { status: 429, headers: cors });
+  if (a.n >= 10) return new Response(JSON.stringify({ error: "محاولات كثيرة، حاولي بعد 15 دقيقة" }), { status: 429, headers: cors });
   try {
     const body = await req.json();
     if (await sha(String(body.pin || "") + "-elsharkawy-clinic-sync-v1") !== PIN_HASH) {
