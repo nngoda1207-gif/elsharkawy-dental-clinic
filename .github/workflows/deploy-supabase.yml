@@ -1,0 +1,25 @@
+name: Deploy clinic sync function
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'supabase/functions/clinic-sync/**'
+      - '.github/workflows/deploy-supabase.yml'
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Link project and deploy Edge Function
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+        run: |
+          test -n "$SUPABASE_ACCESS_TOKEN"
+          test -n "$SUPABASE_PROJECT_REF"
+          supabase link --project-ref "$SUPABASE_PROJECT_REF"
+          supabase functions deploy clinic-sync --no-verify-jwt
