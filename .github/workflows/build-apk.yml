@@ -55,6 +55,15 @@ jobs:
             -Pandroid.injected.signing.store.password="$KEYSTORE_PASSWORD" \
             -Pandroid.injected.signing.key.alias="$KEY_ALIAS" \
             -Pandroid.injected.signing.key.password="$KEY_PASSWORD"
+      - name: Verify release package and original signing certificate
+        if: steps.signing.outputs.available == 'true'
+        run: |
+          APK="android/app/build/outputs/apk/release/app-release.apk"
+          TOOLS="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n1)"
+          "$TOOLS/aapt" dump badging "$APK" | grep -q "package: name='com.elsharkawy.clinic'"
+          ACTUAL="$( "$TOOLS/apksigner" verify --print-certs "$APK" | awk -F': ' '/Signer #1 certificate SHA-256 digest:/ {gsub(/:/,"",$2); print tolower($2); exit}' )"
+          EXPECTED="f0ea47208d2cb7c04599f1dbf10825511f1878602bbc7446dc12c2599f382985"
+          test "$ACTUAL" = "$EXPECTED"
       - uses: actions/upload-artifact@v4
         with:
           name: elsharkawy-apk-debug
