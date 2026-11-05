@@ -32,6 +32,7 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
         run: |
+          set +x
           if [ -n "$KEYSTORE_BASE64" ] && [ -n "$KEY_ALIAS" ] && [ -n "$KEY_PASSWORD" ] && [ -n "$KEYSTORE_PASSWORD" ]; then
             echo "available=true" >> "$GITHUB_OUTPUT"
           else
@@ -42,8 +43,37 @@ jobs:
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
         run: |
-          echo "$KEYSTORE_BASE64" | base64 --decode > android/release-keystore.jks
+          set +x
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > android/release-keystore.jks
           test -s android/release-keystore.jks
+      - name: Diagnose release signing credentials safely
+        if: steps.signing.outputs.available == 'true'
+        env:
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        run: |
+          set +x
+          STORE="android/release-keystore.jks"
+          if ! keytool -list -keystore "$STORE" -storepass:env KEYSTORE_PASSWORD >/dev/null 2>&1; then
+            echo "STORE_PASSWORD_OK=false"
+            echo "::error::Keystore could not be opened. KEYSTORE_PASSWORD does not match the decoded keystore, or KEYSTORE_BASE64 is not the expected file."
+            exit 1
+          fi
+          echo "STORE_PASSWORD_OK=true"
+          if ! keytool -list -keystore "$STORE" -storepass:env KEYSTORE_PASSWORD -alias "$KEY_ALIAS" >/dev/null 2>&1; then
+            echo "ALIAS_OK=false"
+            echo "::error::KEY_ALIAS was not found in the keystore."
+            exit 1
+          fi
+          echo "ALIAS_OK=true"
+          if ! keytool -certreq -keystore "$STORE" -storepass:env KEYSTORE_PASSWORD -alias "$KEY_ALIAS" -keypass:env KEY_PASSWORD -dname "CN=Signing Diagnostic" -file "$RUNNER_TEMP/signing-diagnostic.csr" >/dev/null 2>&1; then
+            echo "KEY_PASSWORD_OK=false"
+            echo "::error::Keystore and alias are valid, but KEY_PASSWORD could not unlock the private key."
+            exit 1
+          fi
+          rm -f "$RUNNER_TEMP/signing-diagnostic.csr"
+          echo "KEY_PASSWORD_OK=true"
       - name: Build signed release APK
         if: steps.signing.outputs.available == 'true'
         env:
@@ -51,6 +81,7 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
         run: |
+          set +x
           cd android
           ./gradlew assembleRelease \
             -Pandroid.injected.signing.store.file="$PWD/release-keystore.jks" \
