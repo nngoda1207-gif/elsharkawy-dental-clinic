@@ -217,7 +217,8 @@ $("lv").addEventListener("click",function(ev){var t=ev.target,b,x;
  else if(b=t.closest("[data-q]")){x=S.cart.items.filter(function(y){return y.id===b.dataset.i})[0];x.q+=parseInt(b.dataset.q);if(x.q<1)S.cart.items=S.cart.items.filter(function(y){return y!==x});save();rc();rs()}
  else if(b=t.closest("[data-rm]")){S.cart.items=S.cart.items.filter(function(y){return y.id!==b.dataset.rm});save();rc();rs()}
  else if(t.closest("[data-clr]")){if(confirm("مسح الحساب الحالي؟")){var p=S.cart.pt;S.cart=nc();S.cart.pt=p;save();rc();rs()}}
- else if(t.closest("[data-save]")){var s=sums(),pt=canon($("pt").value.trim());if(!S.cart.items.length)return;if(!pt&&!confirm("مفيش اسم مريض، تحفظ كده؟"))return;
+ else if(t.closest("[data-save]")){var s=sums(),pt=canon($("pt").value.trim());if(!S.cart.items.length)return;if(!pt){alert("لازم تسجل اسم المريض قبل حفظ الحساب، علشان الحساب مايضيعش من غير ملف مريض.");$("pt").focus();return}
+  var pd0=S.prof[pt];if(!pd0){var now=Date.now();S.prof[pt]={name:pt,d:$("dt").value||today(),t:now,u:now,c:[],a:[]}};
   S.visits.push({id:id(),d:$("dt").value||today(),t:S.cart.t0||Date.now(),pt:pt,items:S.cart.items.map(function(y){return{n:y.n,p:y.p,q:y.q}}),disc:s.d,sub:s.s,net:s.n,pd:s.pd,r:s.r,note:S.cart.vn||""});
   nt("🧾 حساب جديد: "+(pt||"بدون اسم")+" — "+fmt(s.n)+" ج.م");S.cart=nc();save();rv();$("hist").scrollIntoView({behavior:"smooth"})}
  else if(b=t.closest("[data-vd]")){if(!confirm("حذف الحساب ده؟",b.dataset.vd))return;var v0=S.visits.filter(function(v){return v.id===b.dataset.vd})[0];nt("🗑 حذف حساب "+(v0?pn(v0)+" — "+fmt(v0.net)+" ج.م":""));S.visits=S.visits.filter(function(v){return v.id!==b.dataset.vd});save();pl();rh()}
