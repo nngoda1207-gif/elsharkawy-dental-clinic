@@ -301,7 +301,7 @@ $("rm").addEventListener("input",rrep);$("rpd").addEventListener("toggle",rrep);
 var LS=0;
 // Cloud sync configuration. The service-role key is NEVER stored in this app.
 var CLOUD_URL="https://iqvuosxqdhnqnadvpcwe.supabase.co/functions/v1/clinic-sync";
-var CLOUD_PIN="1997",CLOUD_SYNC_ENABLED=false,cloudBase=null,cloudBusy=false,cloudTimer=0,cloudUnlocked=false,cloudLast="";
+var CLOUD_PIN="1997",CLOUD_SYNC_ENABLED=true,cloudBase=null,cloudBusy=false,cloudTimer=0,cloudUnlocked=false,cloudLast="";
 try{cloudBase=JSON.parse(localStorage.getItem(K+"_cloud_base")||"null")}catch(_e){cloudBase=null}
 function sharedState(x){var o={};Object.keys(x||{}).forEach(function(k){if(["cart","drafts","nt","seen","kashf","undo"].indexOf(k)<0)o[k]=x[k]});return o}
 function cloudStatus(msg){cloudLast=msg||"";var el=$("ss");if(el)el.textContent=(navigator.onLine?"● متصل":"● أوفلاين")+" — "+(cloudLast|| (LS?"آخر حفظ محلي "+tm({t:LS}):"جاهز"))}
