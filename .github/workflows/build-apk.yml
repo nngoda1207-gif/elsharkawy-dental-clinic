@@ -55,25 +55,52 @@ jobs:
         run: |
           set +x
           STORE="android/release-keystore.jks"
-          if ! keytool -list -keystore "$STORE" -storepass:env KEYSTORE_PASSWORD >/dev/null 2>&1; then
-            echo "STORE_PASSWORD_OK=false"
-            echo "::error::Keystore could not be opened. KEYSTORE_PASSWORD does not match the decoded keystore, or KEYSTORE_BASE64 is not the expected file."
+          STORE_OK=false
+          ALIAS_OK=false
+          KEY_OK=false
+          if keytool -list -keystore "$STORE" -storepass:env KEYSTORE_PASSWORD >/dev/null 2>&1; then
+            STORE_OK=true
+            if keytool -list -keystore "$STORE" -storepass:env KEYSTORE_PASSWORD -alias "$KEY_ALIAS" >/dev/null 2>&1; then
+              ALIAS_OK=true
+              cat > "$RUNNER_TEMP/VerifySigningKey.java" <<'JAVA'
+          import java.io.FileInputStream;
+          import java.security.Key;
+          import java.security.KeyStore;
+          public class VerifySigningKey {
+            public static void main(String[] args) throws Exception {
+              char[] storePassword = System.getenv("KEYSTORE_PASSWORD").toCharArray();
+              char[] keyPassword = System.getenv("KEY_PASSWORD").toCharArray();
+              KeyStore ks = KeyStore.getInstance("JKS");
+              try (FileInputStream in = new FileInputStream(args[0])) {
+                ks.load(in, storePassword);
+              }
+              Key key = ks.getKey(System.getenv("KEY_ALIAS"), keyPassword);
+              if (key == null || !(key instanceof java.security.PrivateKey)) {
+                System.exit(3);
+              }
+            }
+          }
+          JAVA
+              if javac "$RUNNER_TEMP/VerifySigningKey.java" >/dev/null 2>&1 && java -cp "$RUNNER_TEMP" VerifySigningKey "$STORE" >/dev/null 2>&1; then
+                KEY_OK=true
+              fi
+            fi
+          fi
+          echo "STORE_PASSWORD_OK=$STORE_OK"
+          echo "ALIAS_OK=$ALIAS_OK"
+          echo "KEY_PASSWORD_OK=$KEY_OK"
+          if [ "$STORE_OK" != true ]; then
+            echo "::error::Keystore password check failed, or decoded keystore is not the expected file."
             exit 1
           fi
-          echo "STORE_PASSWORD_OK=true"
-          if ! keytool -list -keystore "$STORE" -storepass:env KEYSTORE_PASSWORD -alias "$KEY_ALIAS" >/dev/null 2>&1; then
-            echo "ALIAS_OK=false"
-            echo "::error::KEY_ALIAS was not found in the keystore."
+          if [ "$ALIAS_OK" != true ]; then
+            echo "::error::The configured alias was not found in the keystore."
             exit 1
           fi
-          echo "ALIAS_OK=true"
-          if ! keytool -certreq -keystore "$STORE" -storepass:env KEYSTORE_PASSWORD -alias "$KEY_ALIAS" -keypass:env KEY_PASSWORD -dname "CN=Signing Diagnostic" -file "$RUNNER_TEMP/signing-diagnostic.csr" >/dev/null 2>&1; then
-            echo "KEY_PASSWORD_OK=false"
-            echo "::error::Keystore and alias are valid, but KEY_PASSWORD could not unlock the private key."
+          if [ "$KEY_OK" != true ]; then
+            echo "::error::The private key could not be unlocked with the configured key password."
             exit 1
           fi
-          rm -f "$RUNNER_TEMP/signing-diagnostic.csr"
-          echo "KEY_PASSWORD_OK=true"
       - name: Build signed release APK
         if: steps.signing.outputs.available == 'true'
         env:
